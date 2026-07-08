@@ -17,6 +17,7 @@ import {
   MoonStar,
   Plane,
   Play,
+  ShieldCheck,
   Ruler,
   Star,
   Video,
@@ -25,7 +26,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-type Direction = "studio" | "system" | "playbook" | "local";
+type Direction = "studio" | "system" | "playbook" | "local" | "hybrid";
 
 const bookingUrl = "https://americanrealestatemedia.aryeo.com/";
 const phoneUrl = "tel:+17576658656";
@@ -125,7 +126,7 @@ function App() {
   const params = new URLSearchParams(window.location.search);
   const requestedDirection = params.get("direction");
   const initialDirection: Direction =
-    requestedDirection === "system" || requestedDirection === "playbook" || requestedDirection === "local"
+    requestedDirection === "system" || requestedDirection === "playbook" || requestedDirection === "local" || requestedDirection === "hybrid"
       ? requestedDirection
       : "studio";
   const [direction, setDirection] = useState<Direction>(initialDirection);
@@ -137,6 +138,7 @@ function App() {
       {direction === "system" && <SystemDirection />}
       {direction === "playbook" && <PlaybookDirection />}
       {direction === "local" && <LocalDirection />}
+      {direction === "hybrid" && <HybridDirection />}
     </main>
   );
 }
@@ -164,6 +166,7 @@ function Header({ direction, onDirectionChange }: { direction: Direction; onDire
             ["system", "B", "Show Direction B, booking system"],
             ["playbook", "C", "Show Direction C, listing playbook"],
             ["local", "D", "Show Direction D, local market trust"],
+            ["hybrid", "E", "Show Direction E, hybrid candidate"],
           ].map(([value, label, srLabel]) => (
             <button
               className={direction === value ? "active" : ""}
@@ -335,6 +338,50 @@ function LocalDirection() {
   );
 }
 
+function HybridDirection() {
+  return (
+    <>
+      <section id="top" className="hero hybrid-hero">
+        <div className="hybrid-copy">
+          <p className="eyebrow">Version E · Hybrid candidate</p>
+          <h1>Real estate media that gets listings launched.</h1>
+          <p className="lede">
+            Photos, video, drone, 3D tours, floor plans, twilight, and social-ready assets from one Coastal Virginia
+            team, delivered next business day.
+          </p>
+          <div className="hero-actions">
+            <a className="btn solid" href={bookingUrl}>Book a shoot <ArrowRight size={18} /></a>
+            <a className="btn ghost" href="#packages">Compare packages</a>
+            <a className="btn glass" href="#recommender">Get a recommendation</a>
+          </div>
+          <div className="hybrid-proof">
+            <div><strong>50,000+</strong><span>shoots completed since 2016</span></div>
+            <div><strong>Next day</strong><span>average delivery for MLS-ready media</span></div>
+            <div><strong>20+ cities</strong><span>across Coastal VA and NE North Carolina</span></div>
+          </div>
+        </div>
+        <div className="hybrid-media" aria-label="American Real Estate Media sample listing media">
+          <img className="hybrid-main" src={aremImages.heroExterior} alt="Exterior real estate photography sample" decoding="async" />
+          <img src={aremImages.interior} alt="Interior real estate photography sample" decoding="async" />
+          <img src={aremImages.living} alt="Kitchen real estate photography sample" decoding="async" />
+          <div className="hybrid-booking-card">
+            <CalendarCheck size={18} />
+            <strong>One appointment</strong>
+            <span>Photo, video, drone, 3D, floor plans, twilight, and edits coordinated together.</span>
+          </div>
+        </div>
+      </section>
+      <HybridTrustBar />
+      <PackageMatrix />
+      <HybridRecommender />
+      <PortfolioSection />
+      <OperationsSection />
+      <CoverageSection />
+      <FinalCta title="One listing. One local team. One launch-ready media package." />
+    </>
+  );
+}
+
 function Stats() {
   return (
     <div className="stats" aria-label="Company proof points">
@@ -363,6 +410,28 @@ function ProofBar() {
         <Star size={18} fill="currentColor" />
         <p>“Booking is simple and the Matterport tours alone have closed buyers relocating to Hampton Roads sight-unseen.”</p>
       </div>
+    </section>
+  );
+}
+
+function HybridTrustBar() {
+  return (
+    <section className="hybrid-trust-bar">
+      <article>
+        <ShieldCheck size={20} />
+        <strong>Built for repeatable launches</strong>
+        <span>Clear packages, portal booking, prep guidance, and one accountable media team.</span>
+      </article>
+      <article>
+        <MapPinned size={20} />
+        <strong>Local coverage depth</strong>
+        <span>Hampton Roads, Coastal Virginia, Richmond, Williamsburg, and northeastern North Carolina.</span>
+      </article>
+      <article>
+        <Star size={20} />
+        <strong>Seller-ready presentation</strong>
+        <span>Visuals agents can use in MLS, social, listing appointments, and seller updates.</span>
+      </article>
     </section>
   );
 }
@@ -454,6 +523,36 @@ function CampaignBuilder() {
           <li><Check size={15} /> Lead MLS with twilight exterior</li>
           <li><Check size={15} /> Create short-form social motion</li>
         </ul>
+      </div>
+    </section>
+  );
+}
+
+function HybridRecommender() {
+  return (
+    <section id="recommender" className="hybrid-recommender">
+      <div>
+        <p className="eyebrow">Package recommender</p>
+        <h2>Start with the listing. We’ll point agents to the right media mix.</h2>
+        <p>
+          This keeps C’s decision support, but makes it more practical: common listing scenarios map directly to packages
+          and add-ons.
+        </p>
+      </div>
+      <div className="hybrid-scenarios">
+        {[
+          ["Occupied home", "Quick & Easy", "Photos, vertical social video, drone exterior photos, next-day delivery."],
+          ["Waterfront or acreage", "Property Spotlight", "Walkthrough video, drone photos and video, floor plan, add twilight."],
+          ["Premium seller", "Perfect Marketing", "Full campaign kit with video, Matterport, floor plan, and twilight."],
+          ["Fast MLS launch", "Value Listing", "Clean HDR photography, MLS-ready sizing, online gallery."],
+        ].map(([scenario, packageName, detail]) => (
+          <article key={scenario}>
+            <span>{scenario}</span>
+            <strong>{packageName}</strong>
+            <p>{detail}</p>
+            <a href={bookingUrl}>Book this path <ArrowRight size={15} /></a>
+          </article>
+        ))}
       </div>
     </section>
   );
