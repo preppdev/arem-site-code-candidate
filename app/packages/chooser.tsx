@@ -175,7 +175,7 @@ export function PackageChooser() {
                   ) : (
                     <p className="mt-2 text-sm leading-relaxed text-ink-2">
                       Based on these inputs, this looks like a routine package
-                      starting point. Final order details are still confirmed in Aryeo.
+                      starting point. Final order details are still confirmed in the booking flow.
                     </p>
                   )}
                 </div>
@@ -198,7 +198,7 @@ export function PackageChooser() {
                   Book this package <ArrowRight className="h-4 w-4" />
                 </a>
                 <p className="max-w-[15rem] text-xs leading-relaxed text-muted">
-                  Aryeo opens in a new tab. Confirm address, square footage,
+                  Booking opens in a new tab. Confirm address, square footage,
                   access notes, add-ons, and preferred timing there.
                 </p>
                 <a

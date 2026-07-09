@@ -35,7 +35,7 @@ type AgentFastPathProps = {
 export function AgentFastPath({
   tone = "light",
   title = "Need to book a normal listing fast?",
-  body = "Start with the default package, verify the work, confirm coverage, then book in Aryeo.",
+  body = "Start with the default package, verify the work, confirm coverage, then book online.",
 }: AgentFastPathProps) {
   const soft = tone === "soft";
 

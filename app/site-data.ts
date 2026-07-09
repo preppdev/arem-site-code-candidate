@@ -13,7 +13,7 @@ export const company = {
   emailHref: "mailto:Team@AmericanRealEstateMedia.com",
   hours: "8am – 7pm, every day",
   hq: "Portsmouth, VA",
-  bookingUrl: "https://americanrealestatemedia.aryeo.com",
+  bookingUrl: "https://americanrealestatemedia.com/book-photoshoot",
   socialLinks: [
     { label: "Facebook", href: "https://www.facebook.com/americanhomepics" },
     { label: "Instagram", href: "https://www.instagram.com/americanrealestatemedia" },
@@ -873,7 +873,7 @@ export const samples: Sample[] = [
   {
     title: "Matterport 3D tour",
     category: "Matterport",
-    externalUrl: "https://americanrealestatemedia.com/matterport-3d-tours",
+    externalUrl: "/services/matterport",
     externalLabel: "View Matterport details",
     market: "Premium listings",
     packageName: "Perfect Marketing",
@@ -884,7 +884,7 @@ export const samples: Sample[] = [
   {
     title: "CubiCasa floor plan delivery",
     category: "Floor Plans",
-    externalUrl: "https://americanrealestatemedia.com/cubi-casa-floor-plans",
+    externalUrl: "/services/floor-plans",
     externalLabel: "View floor plan details",
     market: "Included in current package ladder",
     packageName: "All packages",

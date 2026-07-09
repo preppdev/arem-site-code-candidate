@@ -37,6 +37,24 @@ Retry behavior:
 
 ## Getting Started
 
+## Launch Smoke Test
+
+Run a public link/copy audit against the deployed site:
+
+```bash
+npm run test:public
+```
+
+Set `PUBLIC_SMOKE_BASE_URL` to check another deployment:
+
+```bash
+PUBLIC_SMOKE_BASE_URL=https://your-preview.vercel.app npm run test:public
+```
+
+The smoke test crawls clickable body links, checks external link status, and
+fails on known launch-blocker copy such as broken booking/proof references or
+staging form language.
+
 First, run the development server:
 
 ```bash

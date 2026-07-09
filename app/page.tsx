@@ -250,7 +250,7 @@ function LaunchProofSystem() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink hover:bg-paper/90"
             >
-              Book in Aryeo <ArrowRight className="h-4 w-4" />
+              Book online <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>

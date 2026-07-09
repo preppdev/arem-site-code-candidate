@@ -11,7 +11,7 @@ import {
   serviceDetails,
 } from "../../site-data";
 import { AgentFastPath } from "../../_components/agent-fast-path";
-import { RealListingLaunch } from "../../_components/real-listing-launch";
+import { LaunchProofStrip } from "../../_components/launch-proof-strip";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -178,7 +178,7 @@ export default async function MarketPage({ params }: Props) {
           body="Most standard listings can begin with Quick & Easy. Review sample work, confirm market coverage, and add video, drone, twilight, or Matterport only when the listing calls for it."
         />
 
-        <RealListingLaunch mode="compact" marketName={market.name} />
+        <LaunchProofStrip marketName={market.name} />
 
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">

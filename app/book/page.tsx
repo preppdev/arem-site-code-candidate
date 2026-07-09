@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Request a Listing Shoot",
     description:
-      "Schedule in Aryeo or send listing details to AREM for package and scope review.",
+      "Book online or send listing details to AREM for package and scope review.",
     url: "/book",
     type: "website",
   },
@@ -47,11 +47,11 @@ export default function BookPage() {
           <div className="lg:col-span-7">
             <p className="eyebrow text-brand">Request a listing shoot</p>
             <h1 className="mt-3 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-              Standard listing ready? Schedule in Aryeo.
+              Standard listing ready? Book online.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
               Most standard resale listings start with Quick & Easy from $150.
-              Use Aryeo when you know the package and want to lock availability.
+              Use online booking when you know the package and want to lock availability.
               Use the AREM request form only when the listing needs package
               guidance, travel review, rush timing, specialty media, or
               brokerage billing context first.
@@ -66,7 +66,7 @@ export default function BookPage() {
                 href={company.bookingUrl}
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
               >
-                Schedule in Aryeo <ArrowRight className="h-4 w-4" />
+                Book online <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#request"
@@ -141,7 +141,7 @@ export default function BookPage() {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-20">
         <div className="rounded-[var(--radius-card)] border border-line bg-paper p-6 shadow-soft sm:p-8 lg:col-span-7">
-          <p className="eyebrow text-brand">Before you open Aryeo</p>
+          <p className="eyebrow text-brand">Before you book online</p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink">
             Have these details ready so the order can be confirmed quickly.
           </h2>
@@ -205,7 +205,7 @@ export default function BookPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-2">
               Send package, address, timing, add-ons, and access notes when you
-              need AREM to confirm scope before you schedule in Aryeo.
+              need AREM to confirm scope before you schedule online.
             </p>
             <a
               href={company.bookingUrl}
@@ -213,7 +213,7 @@ export default function BookPage() {
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm font-semibold text-ink hover:border-ink"
             >
-              Open Aryeo instead <ArrowRight className="h-4 w-4" />
+              Book online instead <ArrowRight className="h-4 w-4" />
             </a>
             <div className="mt-8 border-y border-line py-5">
               <p className="eyebrow text-brand">Teams or office billing</p>

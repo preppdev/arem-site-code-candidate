@@ -15,7 +15,7 @@ import {
   type CompareValue,
 } from "../site-data";
 import { AgentFastPath } from "../_components/agent-fast-path";
-import { RealListingLaunch } from "../_components/real-listing-launch";
+import { LaunchProofStrip } from "../_components/launch-proof-strip";
 import { PackageChooser } from "./chooser";
 
 export const metadata: Metadata = {
@@ -97,8 +97,6 @@ export default function PackagesPage() {
         title="Most agents should start with Quick & Easy."
         body="If the listing is straightforward, choose Quick & Easy. Upgrade when video, drone, twilight, Matterport, or seller-presentation proof matters."
       />
-
-      <RealListingLaunch mode="compact" />
 
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
@@ -212,6 +210,8 @@ export default function PackagesPage() {
           </div>
         </div>
       </section>
+
+      <LaunchProofStrip />
 
       <PackageChooser />
 
@@ -359,7 +359,7 @@ export default function PackagesPage() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
           >
-            Book in Aryeo <ArrowRight className="h-4 w-4" />
+            Book online <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

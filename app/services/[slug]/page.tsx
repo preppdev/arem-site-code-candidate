@@ -48,7 +48,7 @@ const proofLinksBySlug: Record<string, { label: string; href: string }[]> = {
     { label: "View aerial samples", href: "https://americanrealestatemedia.com/aerial-photo-samples" },
   ],
   matterport: [
-    { label: "View Matterport details", href: "https://americanrealestatemedia.com/matterport-3d-tours" },
+    { label: "View Matterport details", href: "/services/matterport" },
   ],
   twilight: [
     { label: "View twilight samples", href: "https://americanrealestatemedia.com/twilight-photo-samples" },
@@ -400,7 +400,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               Ready to schedule
             </p>
             <h3 className="mt-2 text-base font-semibold text-ink group-hover:text-brand">
-              Book in Aryeo
+                Book online
             </h3>
             <p className="mt-1 text-sm leading-relaxed text-ink-2">
               Use the live booking portal when the listing details are ready.

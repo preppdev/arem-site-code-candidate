@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:public": "node scripts/public-smoke.mjs",
     "test:recommend": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test app/packages/recommend.test.mts",
     "test:leads": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test app/api/leads/validation.test.mts app/api/leads/retry-policy.test.mts",
     "test:coverage": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test lib/coverage-public.test.mts"

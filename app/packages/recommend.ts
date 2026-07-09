@@ -95,7 +95,7 @@ export function recommendPackage({
   if (deadline === "Rush / urgent") {
     scopeScore += 2;
     reasons.push("rush timing should be confirmed before booking so specialty media does not miss launch");
-    scopeNotes.push("rush timing should be confirmed in Aryeo before relying on a launch deadline");
+    scopeNotes.push("rush timing should be confirmed before relying on a launch deadline");
   }
   if (market !== "Hampton Roads core") {
     scopeScore += market === "OBX / travel-sensitive" || market === "Eastern Shore" ? 2 : 1;

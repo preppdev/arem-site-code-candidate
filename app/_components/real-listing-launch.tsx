@@ -37,7 +37,10 @@ export function RealListingLaunch({
   if (!lead?.image) return null;
 
   return (
-    <section className="border-y border-line bg-night text-paper">
+    <section
+      id={compact ? undefined : "launch-proof"}
+      className="border-y border-line bg-night text-paper"
+    >
       <div
         className={[
           "mx-auto max-w-7xl px-5 sm:px-8",
@@ -51,10 +54,9 @@ export function RealListingLaunch({
               One AREM launch stack, from first impression to final delivery.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-paper/70">
-              This uses real AREM sample assets and live sample-library paths.
-              The client address is withheld until a named case study is
-              approved, but the proof stack reflects how a {displayMarket}
-              listing is packaged for launch.
+              Built from approved AREM sample assets and live sample-library
+              paths, this proof stack shows how a {displayMarket} listing is
+              packaged for launch without exposing private client details.
             </p>
 
             <div className="mt-5 divide-y divide-paper/12 border-y border-paper/12">

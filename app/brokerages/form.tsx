@@ -194,10 +194,10 @@ export function BrokerageInquiryForm() {
         Request brokerage pilot
       </button>
       <p className="mt-3 text-xs text-muted">
-        This sends a structured pilot request when lead capture is configured.
-        If submission is unavailable, an email draft opens as a fallback. By
-        submitting, you agree that AREM may use these details to follow up about
-        your request. See <a href="/privacy" className="font-semibold text-brand hover:text-brand-ink">Privacy</a>.
+        This sends your pilot details to AREM for account review. If the direct
+        request path cannot complete, an email draft opens with the same details
+        so you can still reach the team. AREM uses these details to follow up
+        about your request. See <a href="/privacy" className="font-semibold text-brand hover:text-brand-ink">Privacy</a>.
       </p>
     </form>
   );
