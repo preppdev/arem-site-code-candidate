@@ -487,6 +487,16 @@ export const serviceArea = {
   ],
 };
 
+export type ProofService =
+  | "Photography"
+  | "Video"
+  | "Aerial"
+  | "Twilight"
+  | "Matterport"
+  | "Floor Plans"
+  | "Virtual Staging"
+  | "Advanced Editing";
+
 export type MarketPage = {
   slug: string;
   name: string;
@@ -495,6 +505,8 @@ export type MarketPage = {
   intro: string;
   listingContext: string[];
   localPoints: string[];
+  proofCue: string;
+  proofServices: ProofService[];
   recommendedPackage: string;
   packageReason: string;
   nearby: string[];
@@ -517,6 +529,8 @@ export const marketPages: MarketPage[] = [
       "Confirm drone early for beach, waterfront, and high-wind days.",
       "Matterport can help relocation and military buyers understand the home before they arrive.",
     ],
+    proofCue: "Waterfront, resort, condo, and relocation listings often need upgraded media.",
+    proofServices: ["Aerial", "Twilight", "Video", "Matterport"],
     recommendedPackage: "Property Spotlight",
     packageReason:
       "Adds video, drone photos, twilight, floor plan, and listing website support for listings where location and presentation matter.",
@@ -538,6 +552,8 @@ export const marketPages: MarketPage[] = [
       "Flag parking, lockbox, tenant, or occupied-home constraints before the shoot.",
       "Use Property Spotlight when waterfront, historic details, or seller-presentation value should be emphasized.",
     ],
+    proofCue: "Historic homes, tight lots, and waterfront listings benefit from clear sequencing.",
+    proofServices: ["Photography", "Floor Plans", "Aerial"],
     recommendedPackage: "Quick & Easy",
     packageReason:
       "Covers full interior/exterior photos, CubiCasa floor plan, and property website without overbuilding the order.",
@@ -559,6 +575,8 @@ export const marketPages: MarketPage[] = [
       "Larger floor plans should be scoped before the appointment so delivery expectations are clear.",
       "Drone can be useful for lots, water access, outbuildings, and neighborhood context when conditions allow.",
     ],
+    proofCue: "Acreage, amenities, and larger homes often need exterior context.",
+    proofServices: ["Aerial", "Floor Plans", "Photography"],
     recommendedPackage: "Property Spotlight",
     packageReason:
       "Adds location/context media to the core photo and floor-plan package for larger or more feature-driven listings.",
@@ -580,6 +598,8 @@ export const marketPages: MarketPage[] = [
       "AREM is headquartered in Portsmouth, which keeps the local team and support path straightforward.",
       "Use Matterport or video for higher-end, relocation, or seller-presentation listings.",
     ],
+    proofCue: "Local access makes Portsmouth a natural fast-turnaround market.",
+    proofServices: ["Photography", "Floor Plans", "Matterport"],
     recommendedPackage: "Quick & Easy",
     packageReason:
       "A clear default for full photo coverage, floor plan, and property website when agents need a clean local launch.",
@@ -601,6 +621,8 @@ export const marketPages: MarketPage[] = [
       "Teams should define package defaults, support routing, and billing preferences before agent-wide adoption.",
       "Market-wide consistency matters when agents order across Virginia Beach, Norfolk, Chesapeake, Portsmouth, and nearby cities.",
     ],
+    proofCue: "Multi-city teams need consistent defaults across Hampton Roads.",
+    proofServices: ["Photography", "Floor Plans", "Video"],
     recommendedPackage: "Team package standard",
     packageReason:
       "Brokerage and team relationships should define default package rules, add-ons, billing, and escalation paths.",
@@ -622,6 +644,8 @@ export const marketPages: MarketPage[] = [
       "Property Spotlight is a stronger fit when drone, video, or twilight help explain land, water, or exterior amenities.",
       "Quick & Easy works for standard listings that need full photo coverage and floor-plan clarity.",
     ],
+    proofCue: "Travel, access, acreage, and waterfront priorities should be scoped early.",
+    proofServices: ["Photography", "Aerial", "Video"],
     recommendedPackage: "Quick & Easy",
     packageReason:
       "A practical default for standard northeastern North Carolina listings, with upgrades scoped around travel and property features.",
@@ -643,6 +667,8 @@ export const marketPages: MarketPage[] = [
       "Drone and twilight are weather-sensitive; confirm wind, access, and launch deadlines early.",
       "Matterport can help distant buyers or rental guests understand layout and flow before visiting.",
     ],
+    proofCue: "Coastal, rental, and premium listings need views and amenities explained fast.",
+    proofServices: ["Aerial", "Twilight", "Video", "Matterport"],
     recommendedPackage: "Property Spotlight",
     packageReason:
       "Adds motion, aerial, twilight, and floor-plan context for coastal properties where views and amenities drive interest.",
@@ -741,6 +767,14 @@ export type Sample = {
   propertyType?: string;
   useCase?: string;
   note?: string;
+  proofFit?: {
+    localMarkets?: string[];
+    regions?: string[];
+    referenceMarkets?: string[];
+    referenceRegions?: string[];
+    serviceFit?: ProofService[];
+    priority?: number;
+  };
   tall?: boolean; // hint for masonry-ish variation
 };
 
@@ -754,6 +788,12 @@ export const samples: Sample[] = [
     propertyType: "Feature-driven listing",
     useCase: "Hero image / seller presentation",
     note: "MLS-ready exterior proof",
+    proofFit: {
+      regions: ["Coastal Virginia", "Hampton Roads, VA"],
+      referenceRegions: ["Northeastern North Carolina"],
+      serviceFit: ["Photography"],
+      priority: 100,
+    },
     tall: true,
   },
   {
@@ -765,6 +805,12 @@ export const samples: Sample[] = [
     propertyType: "Standard resale",
     useCase: "MLS launch / gallery delivery",
     note: "Interior and exterior photo coverage",
+    proofFit: {
+      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      referenceRegions: ["Northeastern North Carolina"],
+      serviceFit: ["Photography", "Floor Plans"],
+      priority: 94,
+    },
   },
   {
     title: "Richmond listing photography",
@@ -775,6 +821,12 @@ export const samples: Sample[] = [
     propertyType: "Standard resale",
     useCase: "MLS and agent marketing",
     note: "Representative delivered photo set",
+    proofFit: {
+      localMarkets: ["Richmond"],
+      referenceRegions: ["Coastal Virginia"],
+      serviceFit: ["Photography"],
+      priority: 45,
+    },
   },
   {
     title: "Northern Virginia interior",
@@ -785,6 +837,11 @@ export const samples: Sample[] = [
     propertyType: "Entry package",
     useCase: "Clean interior proof",
     note: "Clean MLS-ready interior",
+    proofFit: {
+      referenceRegions: ["Coastal Virginia"],
+      serviceFit: ["Photography"],
+      priority: 34,
+    },
   },
   {
     title: "Charlottesville property media",
@@ -795,6 +852,12 @@ export const samples: Sample[] = [
     propertyType: "Seller-presentation listing",
     useCase: "Premium photo sequence",
     note: "Seller-presentation quality imagery",
+    proofFit: {
+      referenceMarkets: ["Virginia Beach", "Chesapeake", "Outer Banks"],
+      referenceRegions: ["Hampton Roads, VA", "Coastal Virginia", "Northeastern North Carolina"],
+      serviceFit: ["Photography"],
+      priority: 72,
+    },
     tall: true,
   },
   {
@@ -806,6 +869,12 @@ export const samples: Sample[] = [
     propertyType: "Standard resale",
     useCase: "Interior flow and room context",
     note: "Interior coverage sample",
+    proofFit: {
+      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      referenceRegions: ["Northeastern North Carolina"],
+      serviceFit: ["Photography"],
+      priority: 96,
+    },
   },
   {
     title: "Norfolk listing proof",
@@ -816,6 +885,12 @@ export const samples: Sample[] = [
     propertyType: "Local listing",
     useCase: "MLS-ready local proof",
     note: "Local market sample",
+    proofFit: {
+      localMarkets: ["Norfolk"],
+      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      serviceFit: ["Photography"],
+      priority: 98,
+    },
   },
   {
     title: "NOVA listing photos",
@@ -826,6 +901,11 @@ export const samples: Sample[] = [
     propertyType: "Standard resale",
     useCase: "Full photo delivery",
     note: "Full photo delivery sample",
+    proofFit: {
+      referenceRegions: ["Coastal Virginia"],
+      serviceFit: ["Photography"],
+      priority: 30,
+    },
   },
   {
     title: "Charlottesville interior",
@@ -836,6 +916,11 @@ export const samples: Sample[] = [
     propertyType: "Interior proof",
     useCase: "Seller-facing visual quality",
     note: "Interior proof sample",
+    proofFit: {
+      referenceRegions: ["Coastal Virginia", "Northeastern North Carolina"],
+      serviceFit: ["Photography"],
+      priority: 32,
+    },
   },
   {
     title: "Walkthrough video library",
@@ -847,6 +932,10 @@ export const samples: Sample[] = [
     propertyType: "Motion proof",
     useCase: "MLS, social, and listing presentation",
     note: "Live AREM Vimeo sample library",
+    proofFit: {
+      serviceFit: ["Video"],
+      priority: 88,
+    },
   },
   {
     title: "Drone coverage library",
@@ -858,6 +947,10 @@ export const samples: Sample[] = [
     propertyType: "Acreage / location context",
     useCase: "Lot, roofline, water, and neighborhood proof",
     note: "Live AREM aerial sample library",
+    proofFit: {
+      serviceFit: ["Aerial"],
+      priority: 90,
+    },
   },
   {
     title: "Virtual twilight library",
@@ -869,6 +962,10 @@ export const samples: Sample[] = [
     propertyType: "Curb appeal",
     useCase: "Hero image and scroll-stopping exterior",
     note: "Live AREM twilight sample library",
+    proofFit: {
+      serviceFit: ["Twilight"],
+      priority: 86,
+    },
   },
   {
     title: "Matterport 3D tour",
@@ -880,6 +977,10 @@ export const samples: Sample[] = [
     propertyType: "Premium / relocation listing",
     useCase: "Remote buyer layout review",
     note: "Matterport 3D tour service reference",
+    proofFit: {
+      serviceFit: ["Matterport"],
+      priority: 84,
+    },
   },
   {
     title: "CubiCasa floor plan delivery",
@@ -891,6 +992,10 @@ export const samples: Sample[] = [
     propertyType: "Layout proof",
     useCase: "Buyer flow, room dimensions, and seller reporting",
     note: "Floor plan service reference",
+    proofFit: {
+      serviceFit: ["Floor Plans"],
+      priority: 92,
+    },
   },
   {
     title: "Virtual staging before / after",
@@ -902,6 +1007,10 @@ export const samples: Sample[] = [
     propertyType: "Vacant listing",
     useCase: "Room function and scale",
     note: "Live AREM virtual staging sample library",
+    proofFit: {
+      serviceFit: ["Virtual Staging"],
+      priority: 72,
+    },
   },
   {
     title: "Advanced edit examples",
@@ -913,6 +1022,10 @@ export const samples: Sample[] = [
     propertyType: "Listing-safe image polish",
     useCase: "Sky replacement, item removal, screen replacement, and lawn polish",
     note: "Advanced editing service reference",
+    proofFit: {
+      serviceFit: ["Advanced Editing"],
+      priority: 68,
+    },
   },
 ];
 

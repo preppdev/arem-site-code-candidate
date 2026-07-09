@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { ArrowRight, Check, MapPin } from "lucide-react";
 import {
   company,
   marketPages,
   packages,
   priceFactors,
-  samples,
   serviceDetails,
 } from "../../site-data";
 import { AgentFastPath } from "../../_components/agent-fast-path";
@@ -48,7 +46,6 @@ export default async function MarketPage({ params }: Props) {
 
   if (!market) notFound();
 
-  const visualProof = samples.filter((sample) => sample.image).slice(0, 3);
   const faqItems = [
     {
       q: `Does AREM serve ${market.name}?`,
@@ -178,7 +175,12 @@ export default async function MarketPage({ params }: Props) {
           body="Most standard listings can begin with Quick & Easy. Review sample work, confirm market coverage, and add video, drone, twilight, or Matterport only when the listing calls for it."
         />
 
-        <LaunchProofStrip marketName={market.name} />
+        <LaunchProofStrip
+          marketName={market.name}
+          marketRegion={market.region}
+          localCue={market.proofCue}
+          serviceFocus={market.proofServices}
+        />
 
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
@@ -228,56 +230,67 @@ export default async function MarketPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="border-y border-line bg-night text-paper">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-end lg:py-16">
+        <section className="border-y border-line bg-paper">
+          <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">
             <div>
-              <p className="eyebrow text-twilight">Local proof</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
-                Match {market.name} planning to real AREM sample work.
+              <p className="eyebrow text-brand">Market launch scenario</p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink">
+                How a {market.name} listing usually scopes.
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-paper/70">
-                Use local context to choose the package, then inspect sample
-                media to judge quality before booking.
+              <p className="mt-3 text-sm leading-relaxed text-ink-2">
+                A quick bridge between local planning notes and the full package
+                ladder below.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="/samples"
-                  className="inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink hover:bg-paper/90"
-                >
-                  View samples <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="/coverage"
-                  className="inline-flex items-center gap-2 rounded-full border border-paper/20 px-5 py-2.5 text-sm font-semibold text-paper hover:border-paper/50"
-                >
-                  Check coverage
-                </a>
-              </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {visualProof.map((sample) => (
-                <a
-                  key={sample.title}
-                  href="/samples"
-                  className="group relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-night"
-                >
-                  {sample.image && (
-                    <Image
-                      src={sample.image}
-                      alt={`${sample.title} — AREM sample work`}
-                      fill
-                      sizes="(min-width: 1024px) 22vw, 100vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent p-3 pt-8">
-                    <p className="text-xs font-semibold text-paper">{sample.title}</p>
-                    <p className="mt-1 text-[0.68rem] leading-snug text-paper/65">
-                      {[sample.packageName, sample.useCase].filter(Boolean).join(" · ")}
-                    </p>
-                  </div>
-                </a>
-              ))}
+            <div className="grid gap-4 md:grid-cols-3">
+              <div className="border-t border-line pt-4">
+                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-brand">
+                  Starting point
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-ink">
+                  {market.recommendedPackage}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">
+                  {market.packageReason}
+                </p>
+              </div>
+              <div className="border-t border-line pt-4">
+                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-brand">
+                  Upgrade trigger
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-ink">
+                  Local context
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">
+                  {market.proofCue}
+                </p>
+              </div>
+              <div className="border-t border-line pt-4">
+                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-brand">
+                  Proof path
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-ink">
+                  Review, confirm, book.
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">
+                  Inspect samples, confirm coverage, then book the package that
+                  matches the listing.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <a
+                    href="/samples"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-ink"
+                  >
+                    Samples <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a
+                    href="/coverage"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-ink"
+                  >
+                    Coverage
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -289,14 +302,10 @@ export default async function MarketPage({ params }: Props) {
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
                 Published package anchors for local listing decisions.
               </h2>
-              <div className="mt-6 border-y border-line py-5">
-                <p className="text-sm font-semibold text-ink">
-                  Recommended starting point: {market.recommendedPackage}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">
-                  {market.packageReason}
-                </p>
-              </div>
+              <p className="mt-4 text-sm leading-relaxed text-ink-2">
+                Use the ladder to compare starting prices and when each package
+                becomes the better fit for a {market.name} listing.
+              </p>
             </div>
             <div className="divide-y divide-line border-y border-line lg:col-span-7">
               {packages.map((pkg) => (
