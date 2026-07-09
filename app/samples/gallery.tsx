@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import {
@@ -10,15 +10,55 @@ import {
   type SampleCategory,
 } from "../site-data";
 
+const hasProof = (sample: (typeof samples)[number]) =>
+  Boolean(sample.image || sample.externalUrl);
+
+const visibleCategories = sampleCategories.filter((cat) => {
+  if (cat === "All") return true;
+  return samples.some((s) => s.category === cat && hasProof(s));
+});
+
+function categorySlug(cat: SampleCategory) {
+  return cat.toLowerCase().replace(/&/g, "and").replace(/\s+/g, "-");
+}
+
+function categoryFromParam(value: string | null) {
+  if (!value) return null;
+  const normalized = value.toLowerCase();
+  return (
+    visibleCategories.find(
+      (cat) => categorySlug(cat) === normalized || cat.toLowerCase() === normalized,
+    ) ?? null
+  );
+}
+
 export function SampleGallery() {
   const [active, setActive] = useState<SampleCategory>("All");
-  const hasProof = (sample: (typeof samples)[number]) =>
-    Boolean(sample.image || sample.externalUrl);
 
-  const visibleCategories = sampleCategories.filter((cat) => {
-    if (cat === "All") return true;
-    return samples.some((s) => s.category === cat && hasProof(s));
-  });
+  useEffect(() => {
+    const applyRequestedCategory = () => {
+      const requested = new URLSearchParams(window.location.search).get("type");
+      const category = categoryFromParam(requested);
+      if (category) setActive(category);
+    };
+
+    applyRequestedCategory();
+    window.addEventListener("popstate", applyRequestedCategory);
+    window.addEventListener("hashchange", applyRequestedCategory);
+    return () => {
+      window.removeEventListener("popstate", applyRequestedCategory);
+      window.removeEventListener("hashchange", applyRequestedCategory);
+    };
+  }, []);
+
+  const selectCategory = (cat: SampleCategory) => {
+    setActive(cat);
+    const nextUrl =
+      cat === "All"
+        ? `${window.location.pathname}#gallery`
+        : `${window.location.pathname}?type=${categorySlug(cat)}#gallery`;
+    window.history.replaceState(null, "", nextUrl);
+  };
 
   const shown =
     active === "All" ? samples : samples.filter((s) => s.category === active);
@@ -39,7 +79,7 @@ export function SampleGallery() {
             <button
               key={cat}
               type="button"
-              onClick={() => setActive(cat)}
+              onClick={() => selectCategory(cat)}
               aria-pressed={isActive}
               className={[
                 "rounded-full border px-4 py-2 text-sm font-medium transition-colors",

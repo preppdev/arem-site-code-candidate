@@ -6,6 +6,9 @@ import { company, samples } from "../site-data";
 type RealListingLaunchProps = {
   mode?: "full" | "compact";
   marketName?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  anchorId?: string;
 };
 
 const launchProof = [
@@ -25,20 +28,23 @@ const launchSteps = [
 export function RealListingLaunch({
   mode = "full",
   marketName,
+  primaryHref,
+  primaryLabel,
+  anchorId,
 }: RealListingLaunchProps) {
   const imageSamples = samples.filter((sample) => sample.image).slice(0, 6);
   const lead = imageSamples[0];
-  const supporting = imageSamples.slice(1, mode === "compact" ? 4 : 6);
   const googleLink = company.socialLinks.find((link) => link.label === "Google");
   const externalProof = samples.filter((sample) => sample.externalUrl).slice(0, 4);
   const compact = mode === "compact";
+  const supporting = imageSamples.slice(1, compact ? 3 : 6);
   const displayMarket = marketName ?? "Coastal Virginia";
 
   if (!lead?.image) return null;
 
   return (
     <section
-      id={compact ? undefined : "launch-proof"}
+      id={anchorId ?? (compact ? undefined : "launch-proof")}
       className="border-y border-line bg-night text-paper"
     >
       <div
@@ -72,10 +78,10 @@ export function RealListingLaunch({
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/samples"
+                href={primaryHref ?? "/samples"}
                 className="inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink hover:bg-paper/90"
               >
-                Inspect samples <ArrowRight className="h-4 w-4" />
+                {primaryLabel ?? "Inspect samples"} <ArrowRight className="h-4 w-4" />
               </Link>
               {googleLink && (
                 <a
@@ -92,7 +98,12 @@ export function RealListingLaunch({
 
           <div className="grid gap-5 lg:col-span-8">
             <div className="grid gap-3 lg:grid-cols-[1.25fr_0.75fr]">
-              <figure className="group relative min-h-[24rem] overflow-hidden rounded-[var(--radius-card)] bg-night shadow-lift">
+              <figure
+                className={[
+                  "group relative overflow-hidden rounded-[var(--radius-card)] bg-night shadow-lift",
+                  compact ? "min-h-[18rem] sm:min-h-[20rem]" : "min-h-[24rem]",
+                ].join(" ")}
+              >
                 <Image
                   src={lead.image}
                   alt={`${lead.title} - AREM launch proof`}
@@ -114,7 +125,7 @@ export function RealListingLaunch({
               </figure>
 
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-                {supporting.slice(0, 3).map((sample) => (
+                {supporting.slice(0, compact ? 2 : 3).map((sample) => (
                   <figure
                     key={sample.title}
                     className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] border border-paper/10 bg-paper/5 lg:aspect-auto"
@@ -136,19 +147,21 @@ export function RealListingLaunch({
                     </figcaption>
                   </figure>
                 ))}
-                <Link
-                  href="/listing-launch"
-                  className="grid aspect-[4/3] place-items-center rounded-[var(--radius-card)] border border-paper/15 bg-paper/5 p-4 text-center lg:hidden"
-                >
-                  <span>
-                    <span className="block font-mono text-[0.68rem] uppercase tracking-widest text-twilight">
-                      Workflow
+                {!compact && (
+                  <Link
+                    href="/listing-launch"
+                    className="grid aspect-[4/3] place-items-center rounded-[var(--radius-card)] border border-paper/15 bg-paper/5 p-4 text-center lg:hidden"
+                  >
+                    <span>
+                      <span className="block font-mono text-[0.68rem] uppercase tracking-widest text-twilight">
+                        Workflow
+                      </span>
+                      <span className="mt-2 block text-sm font-semibold text-paper">
+                        See the launch process
+                      </span>
                     </span>
-                    <span className="mt-2 block text-sm font-semibold text-paper">
-                      See the launch process
-                    </span>
-                  </span>
-                </Link>
+                  </Link>
+                )}
               </div>
             </div>
 
