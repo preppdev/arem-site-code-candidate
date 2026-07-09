@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/*
+  AREM design system — semantic tokens (mirrors the Flylisted approach).
+  paper = background, ink = text, brand = cobalt accent, line = borders.
+*/
+@theme {
+  --color-paper: #fbfbf9;
+  --color-paper-2: #f3f3ef;
+  --color-ink: #11151c;
+  --color-ink-2: #3a4250;
+  --color-muted: #6b7280;
+  --color-line: #e6e6e0;
+  --color-line-strong: #d6d6cd;
+
+  --color-brand: #1d4ed8;
+  --color-brand-ink: #1736a3;
+  --color-brand-soft: #eef2ff;
+
+  --color-twilight: #f59e0b;
+  --color-night: #0b1220;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-card: 10px;
+
+  --shadow-soft: 0 1px 2px rgb(17 21 28 / 0.04), 0 6px 18px rgb(17 21 28 / 0.05);
+  --shadow-lift: 0 2px 4px rgb(17 21 28 / 0.05), 0 12px 32px rgb(17 21 28 / 0.09);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* utility: thin uppercase eyebrow label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
