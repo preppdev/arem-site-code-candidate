@@ -7,16 +7,16 @@ import {
   bookingConfidence,
   packages,
   packageDeliveryExamples,
-  packageDefaultsByListing,
   compareColumns,
   compareRows,
   pricingNotes,
   priceFactors,
+  serviceDetails,
   type CompareValue,
 } from "../site-data";
-import { AgentFastPath } from "../_components/agent-fast-path";
 import { LaunchProofStrip } from "../_components/launch-proof-strip";
 import { PackageChooser } from "./chooser";
+import { PackagePricingShowcase } from "./package-pricing-showcase";
 
 export const metadata: Metadata = {
   title: "Packages",
@@ -45,8 +45,6 @@ function Cell({ value }: { value: CompareValue }) {
 }
 
 export default function PackagesPage() {
-  const packageSlug = (name: string) =>
-    name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and");
   const packageSchema = {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
@@ -80,150 +78,91 @@ export default function PackagesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(packageSchema) }}
       />
-      <section className="border-b border-line bg-paper-2">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
-          <p className="eyebrow text-brand">Packages</p>
-          <h1 className="mt-3 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Compare packages, side by side.
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink-2">
-            Four tiers, one clear table — no hovering, no clicking through four
-            pages to figure out what you&apos;re buying.
-          </p>
-        </div>
-      </section>
-
-      <AgentFastPath
-        title="Most agents should start with Quick & Easy."
-        body="If the listing is straightforward, choose Quick & Easy. Upgrade when video, drone, twilight, Matterport, or seller-presentation proof matters."
-      />
-
       <section className="border-b border-line bg-paper">
-        <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
-          <div className="grid gap-4 lg:grid-cols-4">
-            {packageDefaultsByListing.map((item) => (
-              <a
-                key={item.listing}
-                href={`#delivery-${packageSlug(item.defaultPackage)}`}
-                className="border-t border-line pt-4 hover:border-brand"
-              >
-                <p className="text-sm font-semibold text-ink">{item.listing}</p>
-                <p className="mt-1 font-mono text-xs font-semibold uppercase tracking-widest text-brand">
-                  {item.defaultPackage}
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-muted">
-                  {item.addOns}
-                </p>
-              </a>
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
+          <p className="eyebrow text-brand">Pricing</p>
+          <h1 className="mt-3 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            Real estate media packages.
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+            Four clear starting points for a clean MLS launch, a stronger seller
+            presentation, or a fully immersive listing campaign.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href={company.bookingUrl}
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
+            >
+              Book online <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#bundles"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm font-semibold text-ink hover:border-ink"
+            >
+              See packages <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-10 grid gap-4 border-t border-line pt-5 sm:grid-cols-3">
+            {[
+              ["4", "published packages"],
+              ["$100", "lowest starting point"],
+              ["Next morning", "standard photo delivery"],
+            ].map(([value, label]) => (
+              <div key={label}>
+                <p className="text-lg font-semibold text-ink">{value}</p>
+                <p className="mt-1 text-sm text-muted">{label}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-14">
-        <div className="mb-8 grid gap-5 rounded-[var(--radius-card)] border border-brand bg-brand-soft p-5 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <p className="eyebrow text-brand">Most standard listings</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
-              Start with Quick & Easy. Upgrade when the seller story needs more.
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-2">
-              For a normal resale listing, Quick & Easy gives full photo
-              coverage, floor plan, showcase site, and next-morning gallery
-              delivery. Move up to Property Spotlight when video, drone, or
-              stronger seller-presentation proof matters.
-            </p>
-          </div>
-          <a
-            href={company.bookingUrl}
-            className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
-          >
-            Book Quick & Easy
-          </a>
-        </div>
-        <div className="grid gap-8 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">
-          <div>
-            <p className="eyebrow text-brand">Choose this if...</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink">
-              Pick the fit first. Compare details second.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-ink-2">
-              Start with the listing situation. The detailed table, package
-              recommender, and delivery examples are lower on the page when you
-              need to verify inclusions.
-            </p>
-          </div>
-          <div className="divide-y divide-line border-y border-line">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.name}
-              className={[
-                "grid gap-3 py-5 md:grid-cols-[1fr_7rem_1.2fr_auto] md:items-center",
-                pkg.featured ? "bg-brand-soft/45 md:px-4" : "",
-              ].join(" ")}
-            >
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-base font-semibold text-ink">{pkg.name}</h3>
-                  {pkg.featured && (
-                    <span className="rounded-full bg-brand px-2 py-0.5 font-mono text-[0.62rem] font-semibold uppercase tracking-wider text-white">
-                      Popular
-                    </span>
-                  )}
-                </div>
-                <p className="mt-1 text-sm text-muted">{pkg.tagline}</p>
-              </div>
-              <p className="text-xl font-semibold tracking-tight text-ink md:text-right">
-                {pkg.priceNote}
-              </p>
-              <div>
-                <p className="text-sm leading-relaxed text-ink-2">
-                  <span className="font-semibold text-ink">Choose if: </span>
-                  {pkg.bestFor}
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-muted">
-                  {pkg.deliveryNote}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3 md:justify-end">
-                <a
-                  href={company.bookingUrl}
-                  className={[
-                    "inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-colors",
-                    pkg.featured
-                      ? "bg-brand text-white hover:bg-brand-ink"
-                      : "border border-line-strong text-ink hover:border-ink",
-                  ].join(" ")}
-                >
-                  Book
-                </a>
-                <a href={`#delivery-${packageSlug(pkg.name)}`} className="text-sm font-semibold text-brand hover:text-brand-ink">
-                  Example
-                </a>
-              </div>
-            </div>
-          ))}
-          </div>
-        </div>
-      </section>
+      <PackagePricingShowcase />
 
       <LaunchProofStrip />
 
       <PackageChooser />
 
-      <section className="border-y border-line bg-paper">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:py-14">
-          <div>
-            <p className="eyebrow text-brand">Book with confidence</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink">
-              The quick rules behind the package ladder.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-ink-2">
-              The AREM booking flow confirms the order path, but agents should not
-              have to guess which package fits a standard listing.
-            </p>
+      <section id="services-and-addons" className="scroll-mt-24 border-y border-line bg-paper-2">
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
+          <div className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+            <div>
+              <p className="eyebrow text-brand">Services and add-ons</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                Build around the listing.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink-2">
+                Start with a package, then add only the specialty media the
+                property, seller, and launch plan call for.
+              </p>
+            </div>
+            <div className="grid gap-x-8 sm:grid-cols-2">
+              {serviceDetails.map((service, index) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="group grid grid-cols-[2rem_1fr_auto] gap-3 border-t border-line py-4"
+                >
+                  <span className="font-mono text-xs font-semibold text-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-ink group-hover:text-brand">
+                      {service.title}
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-muted">
+                      {service.lead}
+                    </span>
+                  </span>
+                  <span className="max-w-32 text-right text-xs font-semibold text-brand">
+                    {service.priceHint}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div className="mt-12 grid gap-4 border-t border-line pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {bookingConfidence.map((item) => (
               <div key={item.topic} className="border-t border-line pt-4">
                 <h3 className="text-sm font-semibold text-ink">{item.topic}</h3>
@@ -481,78 +420,19 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 lg:pb-20">
-        <details className="group">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-y border-line py-5">
-            <span>
-              <span className="eyebrow text-brand">Deliverables</span>
-              <span className="mt-2 block text-2xl font-semibold tracking-tight text-ink">
-                Exact outputs by package
-              </span>
-            </span>
-            <span className="text-sm font-semibold text-brand group-open:hidden">Open</span>
-            <span className="hidden text-sm font-semibold text-brand group-open:inline">Close</span>
-          </summary>
-          <div className="grid gap-8 py-8 lg:grid-cols-[0.8fr_1.2fr]">
-            <p className="text-base leading-relaxed text-ink-2">
-              Starting prices get you oriented. Deliverables close the decision:
-              what arrives, what can be added, and what timing should be
-              confirmed before launch.
-            </p>
-            <div className="grid gap-4">
-            {packages.map((pkg) => (
-              <div key={pkg.name} className="rounded-[var(--radius-card)] border border-line bg-paper p-5">
-                <div className="flex flex-wrap items-baseline justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-ink">{pkg.name}</h3>
-                  <p className="font-mono text-sm font-semibold text-brand">
-                    {pkg.priceNote}
-                  </p>
-                </div>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  <div>
-                    <p className="text-sm font-semibold text-ink">Delivered</p>
-                    <ul className="mt-2 space-y-1.5">
-                      {pkg.deliverables.map((item) => (
-                        <li key={item} className="flex gap-2 text-sm text-ink-2">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-ink">Common add-ons</p>
-                    <ul className="mt-2 space-y-1.5">
-                      {pkg.addOns.map((item) => (
-                        <li key={item} className="flex gap-2 text-sm text-ink-2">
-                          <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-3 text-xs leading-relaxed text-muted">
-                      {pkg.deliveryNote}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-            </div>
+      <section className="border-t border-paper/10 bg-night text-paper">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center lg:py-16">
+          <div>
+            <p className="eyebrow text-paper/50">Ready when the listing is</p>
+            <h2 className="mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-paper sm:text-3xl">
+              Choose a package now. Confirm the exact scope in the order form.
+            </h2>
           </div>
-        </details>
-      </section>
-
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] bg-gradient-to-br from-brand to-brand-ink px-8 py-12 sm:flex-row sm:items-center sm:px-12">
-          <h2 className="max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Ready to book? Start the AREM booking flow.
-          </h2>
           <a
             href={company.bookingUrl}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-ink hover:scale-[1.02]"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-paper px-6 py-3 text-sm font-semibold text-night hover:bg-paper-2"
           >
-            Start booking flow <ArrowRight className="h-4 w-4" />
+            Book online <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>
