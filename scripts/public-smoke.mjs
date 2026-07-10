@@ -2,7 +2,10 @@ const baseUrl = process.env.PUBLIC_SMOKE_BASE_URL ?? "https://platform-site-work
 const maxPages = Number(process.env.PUBLIC_SMOKE_MAX_PAGES ?? 80);
 
 const forbiddenSignals = [
-  { name: "broken Aryeo reference", pattern: /aryeo/i },
+  {
+    name: "known-dead Aryeo hostname",
+    pattern: /americanrealestatemedia\.aryeo\.com/i,
+  },
   {
     name: "staging form copy",
     pattern: /lead capture is configured|submission is unavailable/i,
@@ -14,6 +17,10 @@ const forbiddenSignals = [
 ];
 
 const skippedHrefPrefixes = ["mailto:", "tel:", "#"];
+const requiredExternalLinks = [
+  "https://media.americanrealestatemedia.com/order",
+  "https://media.americanrealestatemedia.com/portal",
+];
 
 function bodyHtml(html) {
   const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
@@ -81,6 +88,12 @@ for (const url of externalLinks) {
   const result = await fetchOk(url);
   if (!result.ok) {
     failures.push(`External link ${url} returned ${result.status} (${result.url})`);
+  }
+}
+
+for (const url of requiredExternalLinks) {
+  if (!externalLinks.has(url)) {
+    failures.push(`Required external link ${url} was not found`);
   }
 }
 

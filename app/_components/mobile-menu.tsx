@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, ArrowRight } from "lucide-react";
+import { Menu, X, Phone, ArrowRight, LogIn } from "lucide-react";
 import { company, nav } from "../site-data";
 
 export function MobileMenu() {
@@ -28,8 +28,9 @@ export function MobileMenu() {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
+        id="site-menu-trigger"
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open menu"
@@ -96,6 +97,13 @@ export function MobileMenu() {
               >
                 Contact
               </Link>
+              <a
+                href={company.portalUrl}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 rounded-lg px-3 py-3 text-base font-medium text-ink transition-colors hover:bg-paper-2"
+              >
+                <LogIn className="h-4 w-4" /> Client login
+              </a>
             </nav>
 
             <div className="mt-auto space-y-3 border-t border-line p-5">
@@ -107,6 +115,7 @@ export function MobileMenu() {
               </a>
               <a
                 href={company.bookingUrl}
+                onClick={() => setOpen(false)}
                 className="flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white"
               >
                 Book now <ArrowRight className="h-4 w-4" />

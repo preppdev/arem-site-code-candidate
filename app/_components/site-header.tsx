@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { LogIn, Phone } from "lucide-react";
 import { company, nav } from "../site-data";
 import { MobileMenu } from "./mobile-menu";
 
@@ -19,7 +19,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -31,17 +31,24 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <a
             href={company.phoneHref}
-            className="hidden items-center gap-1.5 text-sm font-medium text-ink-2 transition-colors hover:text-ink lg:flex"
+            className="hidden items-center gap-1.5 text-sm font-medium text-ink-2 transition-colors hover:text-ink 2xl:flex"
           >
             <Phone className="h-4 w-4" />
             {company.phone}
           </a>
           <a
+            href={company.portalUrl}
+            className="hidden items-center gap-1.5 text-sm font-medium text-ink-2 transition-colors hover:text-ink xl:flex"
+          >
+            <LogIn className="h-4 w-4" />
+            Client login
+          </a>
+          <a
             href={company.bookingUrl}
-            className="hidden rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-ink sm:inline-block"
+            className="hidden items-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-ink sm:inline-flex"
           >
             Book now
           </a>

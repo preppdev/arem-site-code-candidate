@@ -22,7 +22,7 @@ const sections = [
   },
   {
     title: "Booking and operational tools",
-    body: "A future production booking flow may collect additional scheduling, payment, property, and order information. Any connected operational systems should disclose their own terms before they are used.",
+    body: "Bookings are scheduled through our hosted online order form, which collects scheduling, payment, property, and order information under its own terms and privacy policy. Review its disclosures when you book.",
   },
   {
     title: "Questions or removal requests",

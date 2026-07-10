@@ -140,7 +140,7 @@ export default async function CoveragePage() {
             </p>
           </div>
           <a
-            href="/book"
+            href={company.bookingUrl}
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Continue to booking <ArrowRight className="h-4 w-4" />

@@ -250,7 +250,7 @@ export default function ResourcesPage() {
               Listing&apos;s ready? So are we.
             </h2>
             <p className="mt-2 text-paper/70">
-              Book in about a minute · delivered next day · {company.phone}.
+              Book online in minutes · delivered next day · {company.phone}.
             </p>
           </div>
           <a

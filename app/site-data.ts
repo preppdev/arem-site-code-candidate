@@ -13,7 +13,10 @@ export const company = {
   emailHref: "mailto:Team@AmericanRealEstateMedia.com",
   hours: "8am – 7pm, every day",
   hq: "Portsmouth, VA",
-  bookingUrl: "/book",
+  /* Interim: orders use the hosted checkout while the first-party booking
+     product remains a prototype. Public CTAs open this URL in a lightbox. */
+  bookingUrl: "https://media.americanrealestatemedia.com/order",
+  portalUrl: "https://media.americanrealestatemedia.com/portal",
   socialLinks: [
     { label: "Facebook", href: "https://www.facebook.com/americanhomepics" },
     { label: "Instagram", href: "https://www.instagram.com/americanrealestatemedia" },
@@ -34,7 +37,6 @@ export const nav = [
   { label: "Services", href: "/services" },
   { label: "Coverage", href: "/coverage" },
   { label: "Brokerages", href: "/brokerages" },
-  { label: "Book", href: "/book" },
 ] as const;
 
 export type Service = {
@@ -1444,7 +1446,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How does payment work?",
-        a: "This booking concept does not collect payment. In a production booking flow, AREM would confirm payment, brokerage billing, or invoice terms before the appointment is locked.",
+        a: "Payment, brokerage billing, or invoice terms are confirmed through our online order form before the appointment is locked. Book online or call the team and we'll set it up for you.",
       },
     ],
   },

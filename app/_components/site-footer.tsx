@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, LogIn } from "lucide-react";
 import { company, marketPages, serviceDetails } from "../site-data";
 
 export function SiteFooter() {
@@ -100,6 +100,12 @@ export function SiteFooter() {
             className="mt-5 inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Book now
+          </a>
+          <a
+            href={company.portalUrl}
+            className="mt-4 flex items-center gap-2 text-sm font-medium text-paper/70 hover:text-paper"
+          >
+            <LogIn className="h-4 w-4" /> Client login
           </a>
           <div className="mt-5 flex gap-2.5">
             {company.socialLinks.map((s) => (
