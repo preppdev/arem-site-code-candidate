@@ -1,7 +1,10 @@
 # Coverage shoots database — ingest spec
 
-The `/coverage` map is now backed by a **Neon Postgres** database (`shoots` table).
-The AREM Platform keeps it current by pushing new shoots to the ingest endpoint.
+The `/coverage` map is backed by a **Neon Postgres** database (`shoots` table).
+The public site reads that database through `DATABASE_URL` on the Vercel
+`platform-site-work` project. The existing AREM Platform ingest still writes to
+the legacy `arem-site` deployment below; both deployments share the same Neon
+database.
 
 ## Endpoint
 
@@ -14,6 +17,10 @@ Content-Type: application/json
 `INGEST_TOKEN` is stored as a Vercel env var on the `arem-site` project
 (Production). View/rotate it in Vercel → arem-site → Settings → Environment
 Variables.
+
+Do not move ingestion to `platform-site-work` until the producer has been
+repointed and a managed token has been added there. The public site does not
+need `INGEST_TOKEN` to render the map.
 
 ## Body
 
@@ -58,8 +65,11 @@ configured.
 
 ## Read side
 
-- Map data: `GET /api/coverage/points` (CDN-cached ~10 min, builds the compact
-  payload from the DB). The map refreshes within ~10 minutes of new ingests.
+- Production map data: `GET https://www.aremtours.com/api/coverage/points`
+  (CDN-cached ~10 min, builds a privacy-generalized payload from the DB).
+- Public coordinates are rounded to two decimal places and grouped by location,
+  state, year, and city before being sent to the browser.
+- The map refreshes within ~10 minutes of new ingests.
 - The `/coverage` page totals are ISR (10-min revalidate).
 
 ## Re-seed / backfill
