@@ -98,7 +98,7 @@ export function recommendPackage({
     scopeNotes.push("rush timing should be confirmed before relying on a launch deadline");
   }
   if (market !== "Hampton Roads core") {
-    scopeScore += market === "OBX / travel-sensitive" || market === "Eastern Shore" ? 2 : 1;
+    scopeScore += market === "Edenton / corridor edge" ? 2 : 1;
     scopeNotes.push(`${market} orders should confirm service area, travel timing, and any travel terms`);
   }
   if (sellerPressure === "High") {

@@ -201,10 +201,10 @@ export default function CoverageMap() {
               Use the market rules above, or confirm the listing address.
             </p>
             <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-2">
-              AREM serves Hampton Roads, coastal Virginia, and northeastern
-              North Carolina. When a listing is travel-sensitive, rush,
-              weather-dependent, or outside the routine core, the team can
-              confirm coverage before you book.
+              AREM serves the corridor from Ashland and Richmond through Hampton
+              Roads to Elizabeth City and Edenton. When a listing is
+              travel-sensitive, rush, weather-dependent, or near the edge of the
+              corridor, the team can confirm timing before you book.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <a

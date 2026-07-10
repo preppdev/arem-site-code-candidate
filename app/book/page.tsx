@@ -11,7 +11,7 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import { bookingConfidence, company, packages, serviceArea } from "../site-data";
+import { bookingConfidence, company, packages } from "../site-data";
 
 export const metadata: Metadata = {
   title: "Booking Lightbox Concepts",
@@ -257,9 +257,8 @@ export default function BookPage() {
               {packages.map((pkg) => `${pkg.name} ${pkg.priceNote}`).join(" · ")}
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-2">
-              Service coverage includes {serviceArea.hubs.slice(0, 6).join(", ")}
-              , and surrounding Hampton Roads / northeastern North Carolina
-              markets.
+              Service coverage runs from Ashland and Richmond through all of
+              Hampton Roads to Elizabeth City and Edenton.
             </p>
           </div>
           <a

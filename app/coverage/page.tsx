@@ -13,14 +13,14 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Coverage",
   description:
-    "Where American Real Estate Media shoots — a density map of 50,000+ shoots across Virginia and northeastern North Carolina, headquartered in Portsmouth, VA.",
+    "Explore AREM's current Richmond-to-Edenton service corridor and a privacy-conscious map of 50,000+ historical shoots.",
   alternates: {
     canonical: "/coverage",
   },
   openGraph: {
     title: "AREM Coverage",
     description:
-      "Explore AREM's privacy-conscious public coverage map across Virginia and northeastern North Carolina.",
+      "Current service from Richmond through Hampton Roads to Edenton, plus a privacy-conscious historical coverage map.",
     url: "/coverage",
     type: "website",
   },
@@ -54,10 +54,10 @@ export default async function CoveragePage() {
                   : "Core markets, confirmed before you book."}
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
-                A density map of {company.stats.shoots} shoots since{" "}
-                {company.stats.since}. Boots-on-the-ground across Hampton Roads,
-                Virginia and northeastern North Carolina — headquartered in{" "}
-                {company.hq}.
+                Current service runs from Ashland and Richmond through Hampton
+                Roads to Elizabeth City and Edenton. The map shows historical
+                shoot density from {company.stats.shoots} appointments since{" "}
+                {company.stats.since}; AREM is headquartered in {company.hq}.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
@@ -87,8 +87,8 @@ export default async function CoveragePage() {
         </div>
         <p className="mt-3 text-sm text-muted">
           {hasLiveCoverage
-            ? `A live privacy-conscious coverage map of ${meta.total.toLocaleString()} real shoot records across Virginia and northeastern North Carolina, spanning every booking platform AREM has used since 2016. Public points are generalized into nearby-area buckets and can be filtered by state or year.`
-            : `${company.stats.shoots} shoots since ${company.stats.since}, with regular coverage across Hampton Roads, coastal Virginia, and northeastern North Carolina. Use the market rules above or send the address when timing, travel, drone, or launch deadlines matter.`}
+            ? `A live privacy-conscious map of ${meta.total.toLocaleString()} historical shoot records, spanning every booking platform AREM has used since 2016. Historical pins do not define current service eligibility. Public points are generalized into nearby-area buckets and can be filtered by state or year.`
+            : `${company.stats.shoots} shoots since ${company.stats.since}. Current service runs from Ashland and Richmond through Hampton Roads to Elizabeth City and Edenton. Use the market rules above or send the address when timing, travel, drone, or launch deadlines matter.`}
         </p>
 
         {/* coverage cards */}
@@ -104,7 +104,7 @@ export default async function CoveragePage() {
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="eyebrow text-brand">{region.label}</p>
                   <p className="font-mono text-sm font-semibold text-ink">
-                    {hasLiveCoverage ? count.toLocaleString() : "Core market"}
+                    {hasLiveCoverage ? count.toLocaleString() : "Current market"}
                   </p>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-ink-2">

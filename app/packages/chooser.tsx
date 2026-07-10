@@ -27,10 +27,9 @@ const sellerPressureOptions = ["Low", "Medium", "High"] as const;
 const squareFootageBands = ["Under 2,000", "2,000-3,500", "3,500+"] as const;
 const marketOptions = [
   "Hampton Roads core",
-  "Richmond / extended VA",
-  "Eastern Shore",
-  "Elizabeth City / NE NC",
-  "OBX / travel-sensitive",
+  "Richmond / Ashland",
+  "Elizabeth City",
+  "Edenton / corridor edge",
 ] as const;
 
 type Choice<T extends readonly string[]> = T[number];

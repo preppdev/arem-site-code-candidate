@@ -468,24 +468,27 @@ export const mediaStandards = [
   },
 ] as const;
 
-/* Service-area framing for the About page — addresses SITE_AUDIT #9
-   (national branding corrected to the real Hampton Roads + NE NC footprint). */
+/* Current service-area framing. Historical shoot data may extend beyond this
+   corridor, but public booking guidance should use this footprint. */
 export const serviceArea = {
-  headline: "Your Hampton Roads media team — across coastal Virginia & NE North Carolina.",
-  body: "Headquartered in Hampton Roads and shooting across coastal Virginia and northeastern North Carolina. If it's in our region, we can likely shoot it — often the next day.",
+  headline: "From Richmond through Hampton Roads to Elizabeth City and Edenton.",
+  body: "Our primary service corridor runs from Ashland and Richmond through every Hampton Roads member city and surrounding communities, then south to Elizabeth City and Edenton.",
+  shortLabel: "Richmond · Hampton Roads · Elizabeth City · Edenton",
   hubs: [
+    "Ashland, VA",
+    "Richmond, VA",
+    "Williamsburg, VA",
+    "Newport News, VA",
+    "Hampton, VA",
+    "Poquoson, VA",
     "Virginia Beach, VA",
     "Norfolk, VA",
     "Chesapeake, VA",
     "Portsmouth, VA",
     "Suffolk, VA",
-    "Newport News, VA",
-    "Hampton, VA",
-    "Williamsburg, VA",
-    "Richmond, VA",
-    "Eastern Shore, VA",
+    "Franklin, VA",
     "Elizabeth City, NC",
-    "Outer Banks, NC",
+    "Edenton, NC",
   ],
 };
 
@@ -610,7 +613,7 @@ export const marketPages: MarketPage[] = [
   {
     slug: "hampton-roads",
     name: "Hampton Roads",
-    region: "Coastal Virginia",
+    region: "Southeastern Virginia",
     headline: "Real estate photography and media across Hampton Roads.",
     intro:
       "AREM serves agents, teams, and brokerages across Hampton Roads with a repeatable listing launch workflow and clear package ladder.",
@@ -621,7 +624,7 @@ export const marketPages: MarketPage[] = [
     localPoints: [
       "Best brokerage default: Quick & Easy for standard listing launches, with Property Spotlight as the seller-presentation upgrade.",
       "Teams should define package defaults, support routing, and billing preferences before agent-wide adoption.",
-      "Market-wide consistency matters when agents order across Virginia Beach, Norfolk, Chesapeake, Portsmouth, and nearby cities.",
+      "Market-wide consistency matters when agents order across the member cities and surrounding Hampton Roads communities.",
     ],
     proofCue: "Multi-city teams need consistent defaults across Hampton Roads.",
     proofServices: ["Photography", "Floor Plans", "Video"],
@@ -629,6 +632,29 @@ export const marketPages: MarketPage[] = [
     packageReason:
       "Brokerage and team relationships should define default package rules, add-ons, billing, and escalation paths.",
     nearby: ["Virginia Beach", "Norfolk", "Chesapeake", "Portsmouth"],
+  },
+  {
+    slug: "richmond",
+    name: "Richmond",
+    region: "Central Virginia",
+    headline: "Real estate photography and listing media in Richmond.",
+    intro:
+      "AREM serves Richmond, Ashland, and surrounding communities with photography, floor plans, video, drone, Matterport, twilight, and launch-ready listing packages.",
+    listingContext: [
+      "Historic homes, urban properties, new construction, and larger suburban listings benefit from a media plan matched to the property rather than a one-size-fits-all order.",
+      "Appointments near the northern edge of the corridor should confirm access, timing, and specialty media before the shoot is locked.",
+    ],
+    localPoints: [
+      "Best baseline: Quick & Easy for standard listings that need complete photography and floor-plan context.",
+      "Use Property Spotlight when architecture, acreage, amenities, or a seller presentation calls for video and aerial coverage.",
+      "Ashland and surrounding Richmond-area appointments are part of the northern service corridor; exact timing is confirmed with the order.",
+    ],
+    proofCue: "Historic homes, new construction, and larger properties need a media mix matched to the listing.",
+    proofServices: ["Photography", "Floor Plans", "Video", "Aerial"],
+    recommendedPackage: "Quick & Easy",
+    packageReason:
+      "A practical starting point for standard Richmond-area listings, with video, aerial, twilight, and Matterport added when the property calls for them.",
+    nearby: ["Ashland", "Williamsburg", "Hampton Roads", "Newport News"],
   },
   {
     slug: "elizabeth-city",
@@ -651,30 +677,30 @@ export const marketPages: MarketPage[] = [
     recommendedPackage: "Quick & Easy",
     packageReason:
       "A practical default for standard northeastern North Carolina listings, with upgrades scoped around travel and property features.",
-    nearby: ["Outer Banks", "Virginia Beach", "Chesapeake", "Hampton Roads"],
+    nearby: ["Edenton", "Chesapeake", "Virginia Beach", "Hampton Roads"],
   },
   {
-    slug: "outer-banks",
-    name: "Outer Banks",
+    slug: "edenton",
+    name: "Edenton",
     region: "Northeastern North Carolina",
-    headline: "Real estate media for Outer Banks listings and coastal properties.",
+    headline: "Real estate photography and listing media in Edenton.",
     intro:
-      "AREM can help scope listing media for Outer Banks and coastal North Carolina properties where views, amenities, vacation-rental appeal, and timing matter.",
+      "AREM serves Edenton and nearby communities at the southern end of its primary corridor with photography, floor plans, drone where conditions allow, video, and complete listing packages.",
     listingContext: [
-      "Waterfront, vacation-rental, and destination listings often depend on drone, twilight, video, and strong exterior sequencing.",
-      "Weather, wind, travel, and launch deadlines should be confirmed before the appointment is locked.",
+      "Waterfront properties, historic homes, acreage, and rural access can change the ideal media mix and appointment plan.",
+      "Travel, weather, drone conditions, access, and launch deadlines should be confirmed before the appointment is locked.",
     ],
     localPoints: [
-      "Best upgrade path: Property Spotlight or Perfect Marketing for vacation-rental, waterfront, and premium coastal listings.",
+      "Best baseline: Quick & Easy for standard listings, with Property Spotlight for waterfront, acreage, or seller-presentation properties.",
       "Drone and twilight are weather-sensitive; confirm wind, access, and launch deadlines early.",
-      "Matterport can help distant buyers or rental guests understand layout and flow before visiting.",
+      "Edenton is the southern edge of AREM's primary service corridor, so appointment timing is confirmed with the order.",
     ],
-    proofCue: "Coastal, rental, and premium listings need views and amenities explained fast.",
-    proofServices: ["Aerial", "Twilight", "Video", "Matterport"],
-    recommendedPackage: "Property Spotlight",
+    proofCue: "Waterfront, historic, and acreage listings need setting and property context explained clearly.",
+    proofServices: ["Photography", "Aerial", "Floor Plans", "Video"],
+    recommendedPackage: "Quick & Easy",
     packageReason:
-      "Adds motion, aerial, twilight, and floor-plan context for coastal properties where views and amenities drive interest.",
-    nearby: ["Elizabeth City", "Virginia Beach", "Hampton Roads", "Chesapeake"],
+      "A practical default for standard Edenton-area listings, with aerial, video, and twilight added when land, water, or architecture drives the story.",
+    nearby: ["Elizabeth City", "Hampton Roads", "Chesapeake", "Suffolk"],
   },
 ] as const;
 
@@ -689,7 +715,7 @@ export const testimonials = [
     quote:
       "Drone and twilight shots elevated a luxury listing beyond what I imagined. My sellers were thrilled.",
     name: "Luxury Specialist",
-    detail: "Coastal Virginia",
+    detail: "Hampton Roads, VA",
   },
   {
     quote:
@@ -785,13 +811,13 @@ export const samples: Sample[] = [
     title: "Exterior launch hero",
     category: "Photography",
     image: "https://images.squarespace-cdn.com/content/v1/5f13be7a7449b4666085ff74/1599834683237-GGSLCEONKIJ04QQERTNV/1920%2B%2B%282%29.jpg",
-    market: "Coastal Virginia",
+    market: "Hampton Roads, VA",
     packageName: "Property Spotlight",
     propertyType: "Feature-driven listing",
     useCase: "Hero image / seller presentation",
     note: "MLS-ready exterior proof",
     proofFit: {
-      regions: ["Coastal Virginia", "Hampton Roads, VA"],
+      regions: ["Southeastern Virginia", "Hampton Roads, VA"],
       referenceRegions: ["Northeastern North Carolina"],
       serviceFit: ["Photography"],
       priority: 100,
@@ -808,7 +834,7 @@ export const samples: Sample[] = [
     useCase: "MLS launch / gallery delivery",
     note: "Interior and exterior photo coverage",
     proofFit: {
-      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      regions: ["Hampton Roads, VA", "Southeastern Virginia"],
       referenceRegions: ["Northeastern North Carolina"],
       serviceFit: ["Photography", "Floor Plans"],
       priority: 94,
@@ -825,7 +851,7 @@ export const samples: Sample[] = [
     note: "Representative delivered photo set",
     proofFit: {
       localMarkets: ["Richmond"],
-      referenceRegions: ["Coastal Virginia"],
+      referenceRegions: ["Central Virginia"],
       serviceFit: ["Photography"],
       priority: 45,
     },
@@ -840,7 +866,7 @@ export const samples: Sample[] = [
     useCase: "Clean interior proof",
     note: "Clean MLS-ready interior",
     proofFit: {
-      referenceRegions: ["Coastal Virginia"],
+      referenceRegions: ["Southeastern Virginia"],
       serviceFit: ["Photography"],
       priority: 34,
     },
@@ -855,8 +881,8 @@ export const samples: Sample[] = [
     useCase: "Premium photo sequence",
     note: "Seller-presentation quality imagery",
     proofFit: {
-      referenceMarkets: ["Virginia Beach", "Chesapeake", "Outer Banks"],
-      referenceRegions: ["Hampton Roads, VA", "Coastal Virginia", "Northeastern North Carolina"],
+      referenceMarkets: ["Virginia Beach", "Chesapeake", "Edenton"],
+      referenceRegions: ["Hampton Roads, VA", "Southeastern Virginia", "Northeastern North Carolina"],
       serviceFit: ["Photography"],
       priority: 72,
     },
@@ -872,7 +898,7 @@ export const samples: Sample[] = [
     useCase: "Interior flow and room context",
     note: "Interior coverage sample",
     proofFit: {
-      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      regions: ["Hampton Roads, VA", "Southeastern Virginia"],
       referenceRegions: ["Northeastern North Carolina"],
       serviceFit: ["Photography"],
       priority: 96,
@@ -889,7 +915,7 @@ export const samples: Sample[] = [
     note: "Local market sample",
     proofFit: {
       localMarkets: ["Norfolk"],
-      regions: ["Hampton Roads, VA", "Coastal Virginia"],
+      regions: ["Hampton Roads, VA", "Southeastern Virginia"],
       serviceFit: ["Photography"],
       priority: 98,
     },
@@ -904,7 +930,7 @@ export const samples: Sample[] = [
     useCase: "Full photo delivery",
     note: "Full photo delivery sample",
     proofFit: {
-      referenceRegions: ["Coastal Virginia"],
+      referenceRegions: ["Southeastern Virginia"],
       serviceFit: ["Photography"],
       priority: 30,
     },
@@ -919,7 +945,7 @@ export const samples: Sample[] = [
     useCase: "Seller-facing visual quality",
     note: "Interior proof sample",
     proofFit: {
-      referenceRegions: ["Coastal Virginia", "Northeastern North Carolina"],
+      referenceRegions: ["Southeastern Virginia", "Northeastern North Carolina"],
       serviceFit: ["Photography"],
       priority: 32,
     },
@@ -1181,7 +1207,7 @@ export const packageDefaultsByListing = [
 export const firstShootFaqs = [
   {
     q: "How do I know if my listing is in range?",
-    a: "AREM regularly shoots across Hampton Roads, coastal Virginia, and northeastern North Carolina. Travel-sensitive orders can be confirmed before booking.",
+    a: "AREM's primary service corridor runs from Ashland and Richmond through Hampton Roads to Elizabeth City and Edenton. Travel-sensitive timing can be confirmed before booking.",
   },
   {
     q: "Are these final prices?",
@@ -1408,7 +1434,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How do I book a shoot?",
-        a: "Choose a package, add listing details, and request preferred timing through the AREM booking flow. AREM confirms scope, access, and any constraints before the shoot is locked. We serve Hampton Roads, coastal Virginia, and northeastern North Carolina.",
+        a: "Choose a package, add listing details, and request preferred timing through the AREM booking flow. AREM confirms scope, access, and any constraints before the shoot is locked. We serve the corridor from Ashland and Richmond through Hampton Roads to Elizabeth City and Edenton.",
       },
       {
         q: "What file formats are delivered?",

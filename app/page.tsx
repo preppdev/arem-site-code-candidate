@@ -58,7 +58,7 @@ function Hero() {
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:px-8 lg:grid-cols-12 lg:py-14">
         <div className="lg:col-span-6">
           <p className="eyebrow text-brand">
-            Listing media operation · Coastal Virginia & NE North Carolina
+            Richmond · Hampton Roads · Elizabeth City · Edenton
           </p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.7rem]">
             Media back by morning. Listings ready to launch.
@@ -426,8 +426,9 @@ function CtaBand() {
             Book the shoot, get the media, launch the listing.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-2">
-            Serving Hampton Roads, coastal Virginia, and northeastern North
-            Carolina with published package anchors and direct team support.
+            Serving the corridor from Ashland and Richmond through Hampton Roads
+            to Elizabeth City and Edenton, with published package anchors and
+            direct team support.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3 lg:justify-end">

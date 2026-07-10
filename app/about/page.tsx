@@ -5,7 +5,7 @@ import { company, serviceArea } from "../site-data";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "American Real Estate Media has completed 50,000+ shoots since 2016 across Hampton Roads and northeastern North Carolina. Headquartered in Portsmouth, VA, with a team of vetted local photographers.",
+    "American Real Estate Media has completed 50,000+ shoots since 2016 and serves the corridor from Richmond through Hampton Roads to Elizabeth City and Edenton.",
 };
 
 const values = [
@@ -81,8 +81,8 @@ export default function AboutPage() {
                 Nearly a decade and more than {company.stats.shoots} shoots later,
                 that belief hasn&apos;t changed. What&apos;s grown is our reach:
                 a team of photographers, videographers, and licensed drone
-                pilots delivering the same standard across coastal Virginia and
-                northeastern North Carolina.
+                pilots delivering the same standard from Richmond through
+                Hampton Roads to Elizabeth City and Edenton.
               </p>
               <p>
                 Whether it&apos;s a starter condo or a waterfront estate, every
@@ -136,7 +136,7 @@ export default function AboutPage() {
               </span>
             ))}
             <span className="inline-flex items-center rounded-full bg-brand-soft px-3.5 py-1.5 text-sm font-medium text-brand-ink">
-              + many more
+              + surrounding communities
             </span>
           </div>
 
@@ -145,7 +145,7 @@ export default function AboutPage() {
             <a href={company.emailHref} className="font-medium text-brand underline-offset-2 hover:underline">
               Email us
             </a>{" "}
-            — our network is growing and we can likely cover you.
+            — we can confirm whether the address fits the current service corridor.
           </p>
         </div>
       </section>

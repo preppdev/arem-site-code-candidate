@@ -12,7 +12,7 @@ type RealListingLaunchProps = {
 };
 
 const launchProof = [
-  ["Market", "Hampton Roads / Coastal Virginia"],
+  ["Market", "Hampton Roads"],
   ["Package fit", "Quick & Easy baseline, Spotlight upgrade when video or drone matters"],
   ["Timeline", "Booked, captured, delivered for next-morning launch"],
   ["Delivered", "Photo gallery, floor plan path, property website, MLS-ready downloads"],
@@ -38,7 +38,7 @@ export function RealListingLaunch({
   const externalProof = samples.filter((sample) => sample.externalUrl).slice(0, 4);
   const compact = mode === "compact";
   const supporting = imageSamples.slice(1, compact ? 3 : 6);
-  const displayMarket = marketName ?? "Coastal Virginia";
+  const displayMarket = marketName ?? "Hampton Roads";
 
   if (!lead?.image) return null;
 

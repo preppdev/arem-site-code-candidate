@@ -10,18 +10,18 @@ const coreSlugs = [
   "hampton-roads",
 ] as const;
 
-const travelReviewSlugs = ["elizabeth-city", "outer-banks"] as const;
+const travelReviewSlugs = ["richmond", "elizabeth-city", "edenton"] as const;
 
 const coverageRules = [
   {
     label: "Routine core",
-    title: "Hampton Roads first",
-    body: "Virginia Beach, Norfolk, Chesapeake, Portsmouth, and nearby Hampton Roads markets are the cleanest default coverage path.",
+    title: "All of Hampton Roads",
+    body: "Every Hampton Roads member city and surrounding community is part of the primary service market.",
   },
   {
     label: "Confirm first",
-    title: "Coastal NC and travel-sensitive listings",
-    body: "Elizabeth City, Outer Banks, rural acreage, waterfront priorities, and rush deadlines should be confirmed before the appointment is locked.",
+    title: "Confirm corridor-edge timing",
+    body: "Richmond, Ashland, Elizabeth City, Edenton, rural acreage, waterfront priorities, and rush deadlines should be confirmed before the appointment is locked.",
   },
   {
     label: "Address check",
@@ -58,10 +58,10 @@ export function CoverageConfidence({ mode = "full" }: CoverageConfidenceProps) {
               Core markets are clear before the live heatmap loads.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-2">
-              AREM is headquartered in {company.hq} and built around Hampton
-              Roads, coastal Virginia, and northeastern North Carolina. Use the
-              map for historical proof; use these rules when you just need to
-              know whether to book or confirm first.
+              AREM is headquartered in {company.hq}. Current service runs from
+              Ashland and Richmond through Hampton Roads to Elizabeth City and
+              Edenton. Use the map for historical proof; use these rules when
+              you need to know whether to book or confirm timing first.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a

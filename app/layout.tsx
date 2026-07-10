@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s — American Real Estate Media",
   },
   description:
-    "Professional real estate photography, video, drone, Matterport 3D tours, twilight, and floor plans across Hampton Roads and northeastern North Carolina. 50,000+ shoots since 2016. Next-day delivery.",
+    "Professional real estate photography, video, drone, Matterport 3D tours, twilight, and floor plans from Richmond through Hampton Roads to Elizabeth City and Edenton. 50,000+ shoots since 2016.",
   keywords: [
     "real estate photography",
     "drone photography",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "American Real Estate Media",
     description:
-      "Real estate photography & media — 50,000+ shoots across Hampton Roads & NE North Carolina, next-day delivery.",
+      "Real estate photography and media from Richmond through Hampton Roads to Elizabeth City and Edenton. 50,000+ shoots since 2016.",
     type: "website",
     url: "https://americanrealestatemedia.com",
   },
@@ -67,7 +67,7 @@ const localBusinessJsonLd = {
   openingHours: "Mo-Su 08:00-19:00",
   priceRange: "$100+",
   description:
-    "Real estate photography, video, drone, Matterport 3D tours, twilight, floor plans, virtual staging, and listing media services across Hampton Roads, coastal Virginia, and northeastern North Carolina.",
+    "Real estate photography, video, drone, Matterport 3D tours, twilight, floor plans, virtual staging, and listing media services from Ashland and Richmond through Hampton Roads to Elizabeth City and Edenton.",
   makesOffer: services.map((service) => ({
     "@type": "Offer",
     itemOffered: {

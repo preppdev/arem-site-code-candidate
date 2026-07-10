@@ -90,8 +90,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <div className="mt-12 rounded-[var(--radius-card)] border border-line bg-paper-2 p-6">
           <p className="text-base font-semibold text-ink">Need this shot on your next listing?</p>
           <p className="mt-1.5 text-sm text-ink-2">
-            Photography, video, drone, 3D, twilight and more — delivered next day across
-            Hampton Roads &amp; NE North Carolina.
+            Photography, video, drone, 3D, twilight and more — serving Richmond,
+            Hampton Roads, Elizabeth City, and Edenton.
           </p>
           <a
             href={company.bookingUrl}

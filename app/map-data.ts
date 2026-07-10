@@ -6,9 +6,8 @@
   /shoots-points.json. Per-state counts and top cities for the coverage
   cards live in app/coverage-meta.json. This file just holds the card copy.
 
-  AREM's real footprint is Hampton Roads, VA and northeastern North
-  Carolina, with a tail across Virginia and a few in Maryland — NOT
-  national. HQ is Portsmouth, VA.
+  These cards summarize historical shoot records, which extend beyond AREM's
+  current Ashland/Richmond-to-Edenton service corridor. HQ is Portsmouth, VA.
 */
 
 export const coverageRegions: { state: "VA" | "NC" | "MD"; label: string }[] = [

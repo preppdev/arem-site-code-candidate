@@ -20,7 +20,7 @@ const steps = [
   {
     label: "Coverage",
     title: "Confirm market fit",
-    body: "Check the service footprint across coastal Virginia and northeastern North Carolina.",
+    body: "Check the corridor from Richmond through Hampton Roads to Elizabeth City and Edenton.",
     href: "/coverage",
     icon: MapPin,
   },

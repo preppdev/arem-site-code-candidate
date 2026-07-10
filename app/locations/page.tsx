@@ -5,14 +5,14 @@ import { company, marketPages, serviceArea } from "../site-data";
 export const metadata: Metadata = {
   title: "Service Areas",
   description:
-    "Explore American Real Estate Media service-area pages for Hampton Roads, coastal Virginia, and northeastern North Carolina real estate photography and listing media.",
+    "Explore American Real Estate Media coverage from Richmond and Ashland through Hampton Roads to Elizabeth City and Edenton.",
   alternates: {
     canonical: "/locations",
   },
   openGraph: {
     title: "AREM Service Areas",
     description:
-      "Explore AREM real estate photography and listing media coverage across Hampton Roads, coastal Virginia, and northeastern North Carolina.",
+      "Explore AREM real estate photography and listing media coverage from Richmond through Hampton Roads to Elizabeth City and Edenton.",
     url: "/locations",
     type: "website",
   },
@@ -26,7 +26,7 @@ export default function LocationsPage() {
           <div className="lg:col-span-7">
             <p className="eyebrow text-brand">Service areas</p>
             <h1 className="mt-3 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-              Real estate photography across Hampton Roads and coastal North Carolina.
+              Real estate photography from Richmond through Hampton Roads to Edenton.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
               AREM is headquartered in {company.hq} and supports agents, teams,

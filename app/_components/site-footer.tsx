@@ -40,7 +40,7 @@ export function SiteFooter() {
           <span className="text-sm font-semibold text-paper">{company.name}</span>
         </div>
         <p className="mt-3 max-w-sm text-sm leading-relaxed text-paper/60">
-          Listing media across Coastal Virginia and northeastern North Carolina.
+          Listing media from Richmond through Hampton Roads to Elizabeth City and Edenton.
         </p>
 
         <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-paper/10 pt-4 text-sm">
@@ -259,7 +259,7 @@ export function SiteFooter() {
           <p className="hidden lg:block">
             © {company.stats.since}–present {company.name}. All rights reserved.
           </p>
-          <p className="font-mono">Coastal Virginia · NE North Carolina</p>
+          <p className="font-mono">Richmond · Hampton Roads · Elizabeth City · Edenton</p>
         </div>
       </div>
     </footer>

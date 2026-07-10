@@ -6,7 +6,7 @@ import { ContactForm } from "./form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with American Real Estate Media — real estate photography and media across Hampton Roads and northeastern North Carolina. Call (757) 665-8656 or send us your listing details.",
+    "Contact American Real Estate Media for real estate photography from Richmond through Hampton Roads to Elizabeth City and Edenton. Call (757) 665-8656 or send listing details.",
   alternates: {
     canonical: "/contact",
   },
@@ -75,7 +75,7 @@ export default function ContactPage() {
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                   <span>
                     <span className="block font-medium text-ink">Headquarters</span>
-                    {company.hq} · Virginia &amp; NE North Carolina
+                    {company.hq} · Richmond to Edenton service corridor
                   </span>
                 </li>
               </ul>

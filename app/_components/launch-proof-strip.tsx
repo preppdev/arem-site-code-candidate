@@ -88,7 +88,7 @@ function curatedProofSamples(
 }
 
 function displayRegion(region?: string) {
-  return region?.replace(", VA", "").replace("Northeastern North Carolina", "NE North Carolina");
+  return region?.replace(", VA", "");
 }
 
 function proofSummaryFor(samplesToSummarize: LaunchProofSample[], marketRegion?: string) {
@@ -227,7 +227,7 @@ export function LaunchProofStrip({
 }: LaunchProofStripProps) {
   const imageSamples = curatedProofSamples(marketName, marketRegion, serviceFocus);
   const serviceProofLinks = serviceProofLinksFor(serviceFocus, imageSamples);
-  const displayMarket = marketName ?? "Coastal Virginia";
+  const displayMarket = marketName ?? "Hampton Roads";
   const proofSummary = proofSummaryFor(imageSamples, marketRegion);
   const proofPoints = marketName
     ? ([

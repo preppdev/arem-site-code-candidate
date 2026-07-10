@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${service.title} for Real Estate Listings`,
-    description: `${service.description} Available from American Real Estate Media across Hampton Roads, coastal Virginia, and northeastern North Carolina.`,
+    description: `${service.description} Available from American Real Estate Media from Richmond through Hampton Roads to Elizabeth City and Edenton.`,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
@@ -133,7 +133,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     },
     {
       q: `Where is ${service.title.toLowerCase()} available?`,
-      a: `AREM serves Hampton Roads, coastal Virginia, and northeastern North Carolina, including ${serviceArea.hubs.slice(0, 4).join(", ")}. Travel-sensitive orders are confirmed before booking.`,
+      a: `AREM's primary corridor runs from Ashland and Richmond through Hampton Roads to Elizabeth City and Edenton. Travel-sensitive timing is confirmed before booking.`,
     },
   ];
   const jsonLd = [
@@ -413,9 +413,9 @@ export default async function ServiceDetailPage({ params }: Props) {
               Confirm the details that affect launch day.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-2">
-              AREM serves {serviceArea.hubs.slice(0, 5).join(", ")} and nearby
-              coastal Virginia / northeastern North Carolina markets. Travel and
-              unusual media requirements are confirmed before the appointment.
+              AREM serves the corridor from Ashland and Richmond through Hampton
+              Roads to Elizabeth City and Edenton. Travel and unusual media
+              requirements are confirmed before the appointment.
             </p>
           </div>
           <div className="lg:col-span-7">

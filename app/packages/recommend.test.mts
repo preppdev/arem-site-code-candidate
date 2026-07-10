@@ -39,7 +39,7 @@ describe("recommendPackage", () => {
       priority: "Video and drone",
       deadline: "Rush / urgent",
       squareFootage: "3,500+",
-      market: "OBX / travel-sensitive",
+      market: "Edenton / corridor edge",
     });
 
     assert.equal(result.name, "Property Spotlight");
