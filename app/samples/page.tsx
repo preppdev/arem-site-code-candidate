@@ -314,8 +314,6 @@ export default function SamplesPage() {
           </h2>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Book now <ArrowRight className="h-4 w-4" />

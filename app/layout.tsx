@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "./_components/site-header";
 import { SiteFooter } from "./_components/site-footer";
+import { BookingLightbox } from "./_components/booking-lightbox";
 import { company, proofImages, services, serviceArea } from "./site-data";
 
 const inter = Inter({
@@ -100,6 +101,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <BookingLightbox />
       </body>
     </html>
   );

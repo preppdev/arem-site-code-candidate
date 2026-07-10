@@ -191,15 +191,13 @@ export function PackageChooser() {
               <div className="grid gap-3">
                 <a
                   href={company.bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
                 >
                   Book this package <ArrowRight className="h-4 w-4" />
                 </a>
                 <p className="max-w-[15rem] text-xs leading-relaxed text-muted">
-                  Booking opens in a new tab. Confirm address, square footage,
-                  access notes, add-ons, and preferred timing there.
+                  Continue to the AREM booking flow with address, square
+                  footage, access notes, add-ons, and preferred timing.
                 </p>
                 <a
                   href="#compare"

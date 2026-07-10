@@ -63,8 +63,6 @@ export default async function CoveragePage() {
             <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
               <a
                 href={company.bookingUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-sm font-medium text-paper transition-colors hover:bg-brand"
               >
                 Book a shoot <ArrowUpRight className="h-4 w-4" />

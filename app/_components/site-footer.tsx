@@ -97,8 +97,6 @@ export function SiteFooter() {
           </ul>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="mt-5 inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Book now

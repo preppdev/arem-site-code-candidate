@@ -136,8 +136,6 @@ export default function PackagesPage() {
           </div>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Book Quick & Easy
@@ -190,8 +188,6 @@ export default function PackagesPage() {
               <div className="flex flex-wrap items-center gap-3 md:justify-end">
                 <a
                   href={company.bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
                   className={[
                     "inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-colors",
                     pkg.featured
@@ -223,7 +219,7 @@ export default function PackagesPage() {
               The quick rules behind the package ladder.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-2">
-              The live booking portal confirms the order, but agents should not
+              The AREM booking flow confirms the order path, but agents should not
               have to guess which package fits a standard listing.
             </p>
           </div>
@@ -355,11 +351,9 @@ export default function PackagesPage() {
           </Link>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
           >
-            Book online <ArrowRight className="h-4 w-4" />
+            Start booking <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>
@@ -552,15 +546,13 @@ export default function PackagesPage() {
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
         <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] bg-gradient-to-br from-brand to-brand-ink px-8 py-12 sm:flex-row sm:items-center sm:px-12">
           <h2 className="max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Ready to book? Open the live booking portal.
+            Ready to book? Start the AREM booking flow.
           </h2>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-ink hover:scale-[1.02]"
           >
-            Open booking portal <ArrowRight className="h-4 w-4" />
+            Start booking flow <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

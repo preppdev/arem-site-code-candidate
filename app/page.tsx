@@ -72,8 +72,6 @@ function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href={company.bookingUrl}
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-ink"
             >
               Book now <ArrowRight className="h-4 w-4" />
@@ -246,11 +244,9 @@ function LaunchProofSystem() {
             )}
             <a
               href={company.bookingUrl}
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink hover:bg-paper/90"
             >
-              Book online <ArrowRight className="h-4 w-4" />
+              Start booking <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -365,8 +361,6 @@ function Packages() {
 
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className={[
               "inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-colors",
                 pkg.featured
@@ -439,8 +433,6 @@ function CtaBand() {
         <div className="flex flex-wrap items-center gap-3 lg:justify-end">
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
             Book now <ArrowRight className="h-4 w-4" />

@@ -30,11 +30,9 @@ export default function ListingLaunchPage() {
           <div className="mt-7 flex flex-wrap gap-3">
             <a
               href={company.bookingUrl}
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
             >
-              Open booking portal <ArrowRight className="h-4 w-4" />
+              Start booking flow <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="/samples"
@@ -157,11 +155,9 @@ export default function ListingLaunchPage() {
           </div>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
-            Open booking portal <ArrowRight className="h-4 w-4" />
+            Start booking flow <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

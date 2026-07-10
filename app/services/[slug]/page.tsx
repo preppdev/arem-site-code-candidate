@@ -217,11 +217,9 @@ export default async function ServiceDetailPage({ params }: Props) {
             <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href={company.bookingUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
               >
-                Open booking portal <ArrowRight className="h-4 w-4" />
+                Start booking flow <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="/packages"
@@ -392,18 +390,16 @@ export default async function ServiceDetailPage({ params }: Props) {
           </a>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="group border-t border-line pt-4 md:border-t-0 md:pt-0"
           >
             <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">
               Ready to schedule
             </p>
             <h3 className="mt-2 text-base font-semibold text-ink group-hover:text-brand">
-                Book online
+                Start booking
             </h3>
             <p className="mt-1 text-sm leading-relaxed text-ink-2">
-              Use the live booking portal when the listing details are ready.
+              Use the AREM booking flow when the listing details are ready.
             </p>
           </a>
         </div>
@@ -479,16 +475,14 @@ export default async function ServiceDetailPage({ params }: Props) {
               Need {service.title.toLowerCase()} for an upcoming listing?
             </h2>
             <p className="mt-2 text-sm text-ink-2">
-              Open the live booking portal or call {company.phone} for scoping help.
+              Start the booking flow or call {company.phone} for scoping help.
             </p>
           </div>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
-            Open booking portal <ArrowRight className="h-4 w-4" />
+            Start booking flow <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

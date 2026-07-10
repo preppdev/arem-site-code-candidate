@@ -76,8 +76,6 @@ export function AgentFastPath({
             })}
             <a
               href={company.bookingUrl}
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex min-h-24 items-center justify-center gap-2 rounded-[var(--radius-card)] bg-brand px-5 py-4 text-sm font-semibold text-white hover:bg-brand-ink sm:col-span-2 lg:col-span-1"
             >
               <Sparkles className="h-4 w-4" />

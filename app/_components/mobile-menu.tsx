@@ -107,8 +107,6 @@ export function MobileMenu() {
               </a>
               <a
                 href={company.bookingUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white"
               >
                 Book now <ArrowRight className="h-4 w-4" />

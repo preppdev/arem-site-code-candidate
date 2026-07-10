@@ -66,8 +66,6 @@ export function CoverageConfidence({ mode = "full" }: CoverageConfidenceProps) {
             <div className="mt-5 flex flex-wrap gap-3">
               <a
                 href={company.bookingUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-ink"
               >
                 Book in core coverage <ArrowRight className="h-4 w-4" />

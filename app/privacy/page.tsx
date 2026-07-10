@@ -21,8 +21,8 @@ const sections = [
     body: "The website may store form submissions, basic request metadata, user agent, and IP information for lead routing, abuse prevention, audit history, and service follow-up.",
   },
   {
-    title: "Booking and third-party tools",
-    body: "Live booking may happen through AREM's booking portal or other operational tools. Those systems may collect additional scheduling, payment, and property information under their own terms.",
+    title: "Booking and operational tools",
+    body: "A future production booking flow may collect additional scheduling, payment, property, and order information. Any connected operational systems should disclose their own terms before they are used.",
   },
   {
     title: "Questions or removal requests",

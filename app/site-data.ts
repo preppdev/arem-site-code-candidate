@@ -13,7 +13,7 @@ export const company = {
   emailHref: "mailto:Team@AmericanRealEstateMedia.com",
   hours: "8am – 7pm, every day",
   hq: "Portsmouth, VA",
-  bookingUrl: "https://americanrealestatemedia.com/book-photoshoot",
+  bookingUrl: "/book",
   socialLinks: [
     { label: "Facebook", href: "https://www.facebook.com/americanhomepics" },
     { label: "Instagram", href: "https://www.instagram.com/americanrealestatemedia" },
@@ -89,8 +89,8 @@ export const services: Service[] = [
 export const steps = [
   {
     n: "01",
-    title: "Book online",
-    body: "Pick your package and preferred timing through the live booking portal. AREM confirms final scope, access, and any constraints before the shoot is locked.",
+    title: "Build the order",
+    body: "Enter the address, choose a package, add specialty media, and select preferred timing through the AREM booking flow.",
   },
   {
     n: "02",
@@ -412,8 +412,8 @@ export const launchScenarios = [
 export const operationalProof = [
   {
     label: "Booked",
-    value: "Online",
-    detail: "Agents choose package, timing, and notes through the live booking portal.",
+    value: "Direct",
+    detail: "Agents choose package, timing, add-ons, and notes through AREM's own booking path.",
   },
   {
     label: "Shot",
@@ -1406,7 +1406,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How do I book a shoot?",
-        a: "Choose a package and preferred time through the online booking portal. AREM confirms scope, access, and any constraints before the shoot is locked. We serve Hampton Roads, coastal Virginia, and northeastern North Carolina.",
+        a: "Choose a package, add listing details, and request preferred timing through the AREM booking flow. AREM confirms scope, access, and any constraints before the shoot is locked. We serve Hampton Roads, coastal Virginia, and northeastern North Carolina.",
       },
       {
         q: "What file formats are delivered?",
@@ -1444,7 +1444,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How does payment work?",
-        a: "Payment is handled securely through our booking system at the time of scheduling. Add-ons selected on-site are billed with the order.",
+        a: "This booking concept does not collect payment. In a production booking flow, AREM would confirm payment, brokerage billing, or invoice terms before the appointment is locked.",
       },
     ],
   },

@@ -41,8 +41,6 @@ export function SiteHeader() {
           </a>
           <a
             href={company.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
             className="hidden rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-ink sm:inline-block"
           >
             Book now
