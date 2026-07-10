@@ -1,5 +1,10 @@
 const baseUrl = process.env.PUBLIC_SMOKE_BASE_URL ?? "https://platform-site-work.vercel.app";
 const maxPages = Number(process.env.PUBLIC_SMOKE_MAX_PAGES ?? 80);
+const baseHostname = new URL(baseUrl).hostname;
+const expectsNoIndex =
+  baseHostname === "aremtours.com" ||
+  baseHostname === "www.aremtours.com" ||
+  baseHostname.endsWith(".vercel.app");
 
 const forbiddenSignals = [
   {
@@ -67,6 +72,9 @@ while (queue.length > 0 && seenPages.size < maxPages) {
   if (response.status >= 400) {
     failures.push(`Page ${path} returned ${response.status}`);
     continue;
+  }
+  if (expectsNoIndex && !/\bnoindex\b/i.test(response.headers.get("x-robots-tag") ?? "")) {
+    failures.push(`Page ${path} is missing the required noindex response header`);
   }
 
   const html = await response.text();

@@ -4,6 +4,32 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  async headers() {
+    const noIndexHeaders = [
+      {
+        key: "X-Robots-Tag",
+        value: "noindex, nofollow, noarchive",
+      },
+    ];
+
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "aremtours.com" }],
+        headers: noIndexHeaders,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.aremtours.com" }],
+        headers: noIndexHeaders,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: ".*\\.vercel\\.app" }],
+        headers: noIndexHeaders,
+      },
+    ];
+  },
   async redirects() {
     return [
       /* Direct visits fall back to the hosted order form. In-site booking CTAs
