@@ -36,9 +36,15 @@ function hrefsFromBody(html) {
 function sameSitePath(href) {
   const url = new URL(href, baseUrl);
   if (url.origin !== new URL(baseUrl).origin) return null;
-  if (url.pathname.startsWith("/_next/") || url.pathname.startsWith("/api/")) return null;
   url.hash = "";
   return `${url.pathname}${url.search}`;
+}
+
+function isInfrastructureUrl(url) {
+  if (url.origin !== new URL(baseUrl).origin) return false;
+  return ["/_next/", "/api/", "/cdn-cgi/"].some((prefix) =>
+    url.pathname.startsWith(prefix),
+  );
 }
 
 async function fetchOk(url) {
@@ -73,6 +79,7 @@ while (queue.length > 0 && seenPages.size < maxPages) {
 
   for (const href of hrefsFromBody(html)) {
     const url = new URL(href, pageUrl);
+    if (isInfrastructureUrl(url)) continue;
     const internalPath = sameSitePath(url.href);
     if (internalPath) {
       if (!seenPages.has(internalPath) && !queue.includes(internalPath)) {
