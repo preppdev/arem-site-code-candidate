@@ -39,6 +39,11 @@ const nextConfig: NextConfig = {
         destination: "https://media.americanrealestatemedia.com/order",
         permanent: false,
       },
+      {
+        source: "/chesapeake-real-estate-photographer",
+        destination: "/locations/chesapeake",
+        permanent: true,
+      },
     ];
   },
   images: {

@@ -568,23 +568,23 @@ export const marketPages: MarketPage[] = [
     slug: "chesapeake",
     name: "Chesapeake",
     region: "Hampton Roads, VA",
-    headline: "Real estate media for Chesapeake listings.",
+    headline: "Chesapeake real estate photography, from Greenbrier to Hickory.",
     intro:
-      "AREM helps Chesapeake agents market suburban homes, acreage, new construction, and family-focused listings with package clarity and fast delivery.",
+      "AREM photographs listings across Great Bridge, Greenbrier, Hickory, Grassfield, Deep Creek, Western Branch, and surrounding Chesapeake communities, matching the media plan to the property and its setting.",
     listingContext: [
-      "Acreage, neighborhood amenities, and larger homes may need drone, floor plans, or upgraded package coverage.",
-      "Confirm square footage, access, and add-ons before the shoot so the final media matches the listing timeline.",
+      "Chesapeake stretches from dense commercial corridors and mature subdivisions to canals, newer communities, and southern acreage.",
+      "Water access, outbuildings, lot size, community amenities, and larger floor plans should be scoped before the appointment.",
     ],
     localPoints: [
-      "Best upgrade path: Property Spotlight when acreage, amenities, or exterior context help sell the listing.",
-      "Larger floor plans should be scoped before the appointment so delivery expectations are clear.",
-      "Drone can be useful for lots, water access, outbuildings, and neighborhood context when conditions allow.",
+      "Great Bridge and Deep Creek listings may need waterway, community, or exterior context explained clearly.",
+      "Hickory and Grassfield acreage should scope land, outbuildings, driveway approaches, and aerial coverage before launch day.",
+      "Greenbrier and Western Branch listings often benefit from complete photo coverage and floor-plan clarity, with video or twilight added when presentation pressure is higher.",
     ],
-    proofCue: "Acreage, amenities, and larger homes often need exterior context.",
+    proofCue: "Waterways, acreage, established neighborhoods, and newer communities require different media plans.",
     proofServices: ["Aerial", "Floor Plans", "Photography"],
     recommendedPackage: "Property Spotlight",
     packageReason:
-      "Adds location/context media to the core photo and floor-plan package for larger or more feature-driven listings.",
+      "Adds video, aerial, twilight, and floor-plan context when land, water, amenities, or seller-presentation value drive the listing story.",
     nearby: ["Virginia Beach", "Norfolk", "Suffolk", "Portsmouth"],
   },
   {

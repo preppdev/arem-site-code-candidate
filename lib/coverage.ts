@@ -61,6 +61,44 @@ export async function getCoverageMeta(): Promise<{
   return { total, byState, topCities };
 }
 
+export type CityCoverageSummary = {
+  totalShoots: number;
+  firstShootDate: string | null;
+  latestShootDate: string | null;
+  activeYears: number;
+};
+
+export async function getCityCoverageSummary(
+  city: string,
+  state: string,
+): Promise<CityCoverageSummary | null> {
+  const rows = (await sql`
+    select count(*)::int as total_shoots,
+           min(shoot_date)::text as first_shoot_date,
+           max(shoot_date)::text as latest_shoot_date,
+           count(distinct extract(year from shoot_date))::int as active_years
+    from shoots
+    where lower(trim(coalesce(city, ''))) = lower(trim(${city}))
+      and upper(trim(coalesce(state, ''))) = upper(trim(${state}))
+      and shoot_date is not null
+  `) as {
+    total_shoots: number;
+    first_shoot_date: string | null;
+    latest_shoot_date: string | null;
+    active_years: number;
+  }[];
+
+  const row = rows[0];
+  if (!row || row.total_shoots === 0) return null;
+
+  return {
+    totalShoots: row.total_shoots,
+    firstShootDate: row.first_shoot_date,
+    latestShootDate: row.latest_shoot_date,
+    activeYears: row.active_years,
+  };
+}
+
 export async function buildCoveragePayload(): Promise<CoveragePayload> {
   const rows = (await sql`
     select round(s.lat::numeric, 2)::double precision as lat,

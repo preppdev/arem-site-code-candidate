@@ -10,6 +10,14 @@ import {
 } from "../../site-data";
 import { AgentFastPath } from "../../_components/agent-fast-path";
 import { LaunchProofStrip } from "../../_components/launch-proof-strip";
+import { ChesapeakePilot } from "../chesapeake-pilot";
+import {
+  chesapeakeBusinesses,
+  chesapeakeFaqs,
+  chesapeakeNeighborhoods,
+} from "../chesapeake-data";
+
+export const revalidate = 900;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -46,7 +54,9 @@ export default async function MarketPage({ params }: Props) {
 
   if (!market) notFound();
 
-  const faqItems = [
+  const isChesapeake = market.slug === "chesapeake";
+
+  const faqItems = isChesapeake ? [...chesapeakeFaqs] : [
     {
       q: `Does AREM serve ${market.name}?`,
       a: `Yes. ${market.name} is part of AREM's ${market.region} service-area focus. Travel-sensitive timing, drone conditions, and special requests are confirmed before the appointment is locked.`,
@@ -118,6 +128,47 @@ export default async function MarketPage({ params }: Props) {
         },
       })),
     },
+    ...(isChesapeake
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Chesapeake neighborhood guide",
+            itemListElement: chesapeakeNeighborhoods.map((neighborhood, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "Place",
+                name: neighborhood.name,
+                description: neighborhood.overview,
+                containedInPlace: {
+                  "@type": "City",
+                  name: "Chesapeake, VA",
+                },
+              },
+            })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Independent Chesapeake businesses",
+            itemListElement: chesapeakeBusinesses.map((business, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "LocalBusiness",
+                name: business.name,
+                url: business.href,
+                description: business.description,
+                areaServed: {
+                  "@type": "City",
+                  name: "Chesapeake, VA",
+                },
+              },
+            })),
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -180,6 +231,8 @@ export default async function MarketPage({ params }: Props) {
           serviceFocus={market.proofServices}
         />
 
+        {isChesapeake && <ChesapeakePilot />}
+
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
             <div>
@@ -210,23 +263,25 @@ export default async function MarketPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="border-y border-line bg-paper-2">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-20">
-            <div className="lg:col-span-5">
-              <p className="eyebrow text-brand">Local planning notes</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-                What to think through before a {market.name} shoot.
-              </h2>
+        {!isChesapeake && (
+          <section className="border-y border-line bg-paper-2">
+            <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-20">
+              <div className="lg:col-span-5">
+                <p className="eyebrow text-brand">Local planning notes</p>
+                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                  What to think through before a {market.name} shoot.
+                </h2>
+              </div>
+              <div className="divide-y divide-line border-y border-line lg:col-span-7">
+                {market.localPoints.map((point) => (
+                  <p key={point} className="py-4 text-sm leading-relaxed text-ink-2">
+                    {point}
+                  </p>
+                ))}
+              </div>
             </div>
-            <div className="divide-y divide-line border-y border-line lg:col-span-7">
-              {market.localPoints.map((point) => (
-                <p key={point} className="py-4 text-sm leading-relaxed text-ink-2">
-                  {point}
-                </p>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="border-y border-line bg-paper">
           <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">

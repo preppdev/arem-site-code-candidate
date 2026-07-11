@@ -6,6 +6,8 @@ This is the American Real Estate Media public-site prototype, built with
 Optional production environment variables:
 
 - `DATABASE_URL`: enables `/api/leads`, `/api/shoots/ingest`, and coverage data backed by Neon/Postgres.
+- `AREM_PUBLIC_LISTINGS_FEED_URL`: optional server-side endpoint for publication-approved active listing cards on location pages.
+- `AREM_PUBLIC_LISTINGS_FEED_TOKEN`: optional bearer token for the public listing projection; never expose it to the browser.
 - `LEAD_WEBHOOK_URL`: optional POST destination for every accepted lead after DB persistence.
 - `LEAD_WEBHOOK_SECRET`: optional bearer token sent to `LEAD_WEBHOOK_URL`.
 - `LEAD_RETRY_TOKEN`: bearer token for `POST /api/leads/retry`, which replays failed webhook deliveries.
