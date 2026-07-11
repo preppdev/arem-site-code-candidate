@@ -7,6 +7,10 @@ const coreSlugs = [
   "norfolk",
   "chesapeake",
   "portsmouth",
+  "suffolk",
+  "hampton",
+  "newport-news",
+  "williamsburg",
   "hampton-roads",
 ] as const;
 

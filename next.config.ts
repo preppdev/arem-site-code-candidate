@@ -44,6 +44,46 @@ const nextConfig: NextConfig = {
         destination: "/locations/chesapeake",
         permanent: true,
       },
+      {
+        source: "/virginia-beach-real-estate-photographer",
+        destination: "/locations/virginia-beach",
+        permanent: true,
+      },
+      {
+        source: "/portsmouth-real-estate-photography",
+        destination: "/locations/portsmouth",
+        permanent: true,
+      },
+      {
+        source: "/suffolk-real-estate-photography",
+        destination: "/locations/suffolk",
+        permanent: true,
+      },
+      {
+        source: "/hampton-real-estate-photography",
+        destination: "/locations/hampton",
+        permanent: true,
+      },
+      {
+        source: "/newport-news-real-estate-photography",
+        destination: "/locations/newport-news",
+        permanent: true,
+      },
+      {
+        source: "/williamsburg-real-estate-photography",
+        destination: "/locations/williamsburg",
+        permanent: true,
+      },
+      {
+        source: "/hampton-roads-real-estate-photography",
+        destination: "/locations/hampton-roads",
+        permanent: true,
+      },
+      {
+        source: "/richmond-real-estate-photography",
+        destination: "/locations/richmond",
+        permanent: true,
+      },
     ];
   },
   images: {

@@ -1,4 +1,4 @@
-import type { PublicListing } from "../../lib/public-listings";
+import type { PublicListing } from "../../lib/public-listings.ts";
 
 export type ChesapeakeNeighborhood = {
   slug: string;

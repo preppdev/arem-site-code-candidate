@@ -31,7 +31,7 @@ const valid: PublicListingFeedRecord = {
 
 describe("filterPublicListings", () => {
   it("keeps only fresh, approved, for-sale records in the requested city", () => {
-    const result = filterPublicListings([valid], "Chesapeake", now);
+    const result = filterPublicListings([valid], "Chesapeake", "VA", now);
     assert.equal(result.length, 1);
     assert.equal(result[0].id, "listing-1");
   });
@@ -44,6 +44,25 @@ describe("filterPublicListings", () => {
       { ...valid, id: "norfolk", city: "Norfolk" },
     ];
 
-    assert.deepEqual(filterPublicListings(records, "Chesapeake", now), []);
+    assert.deepEqual(filterPublicListings(records, "Chesapeake", "VA", now), []);
+  });
+
+  it("accepts approved North Carolina records for North Carolina markets", () => {
+    const northCarolina = {
+      ...valid,
+      id: "listing-nc",
+      slug: "listing-nc",
+      city: "Elizabeth City",
+      state: "NC",
+    };
+
+    assert.deepEqual(
+      filterPublicListings([northCarolina], "Elizabeth City", "NC", now),
+      [northCarolina],
+    );
+    assert.deepEqual(
+      filterPublicListings([northCarolina], "Elizabeth City", "VA", now),
+      [],
+    );
   });
 });

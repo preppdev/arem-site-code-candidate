@@ -611,6 +611,98 @@ export const marketPages: MarketPage[] = [
     nearby: ["Norfolk", "Chesapeake", "Suffolk", "Virginia Beach"],
   },
   {
+    slug: "suffolk",
+    name: "Suffolk",
+    region: "Hampton Roads, VA",
+    headline: "Suffolk real estate photography, from Harbour View to rural acreage.",
+    intro:
+      "AREM photographs listings across Downtown Suffolk, North Suffolk, Harbour View, Chuckatuck, Driver, and surrounding communities, matching the media plan to suburban homes, waterfront properties, and land.",
+    listingContext: [
+      "Suffolk spans one of Virginia's largest municipal land areas, with growing suburban communities, historic blocks, riverfront homes, farms, and rural acreage.",
+      "Travel, lot size, outbuildings, long approaches, water, and aerial priorities should be scoped before the appointment.",
+    ],
+    localPoints: [
+      "North Suffolk and Harbour View listings often need complete photography, floor-plan clarity, and community-amenity context.",
+      "Chuckatuck, Driver, and rural properties should identify acreage, outbuildings, water, and access requirements before launch day.",
+      "Drone availability depends on the exact address, airspace, weather, wind, and property conditions.",
+    ],
+    proofCue: "Suburban growth, riverfront property, and rural acreage require different appointment plans.",
+    proofServices: ["Photography", "Aerial", "Floor Plans", "Video"],
+    recommendedPackage: "Property Spotlight",
+    packageReason:
+      "Adds video, aerial, twilight, and floor-plan context when land, water, amenities, or seller-presentation value drive the listing.",
+    nearby: ["Portsmouth", "Chesapeake", "Hampton", "Newport News"],
+  },
+  {
+    slug: "hampton",
+    name: "Hampton",
+    region: "Hampton Roads, VA",
+    headline: "Hampton real estate photography from Phoebus to Fox Hill.",
+    intro:
+      "AREM serves Hampton agents across Phoebus, Buckroe Beach, Fort Monroe, Downtown, Fox Hill, Wythe, and surrounding neighborhoods with launch-ready photography and listing media.",
+    listingContext: [
+      "Hampton combines historic districts, Chesapeake Bay and harbor frontage, established neighborhoods, condos, and military-relocation demand.",
+      "Water orientation, building access, bridge and tunnel timing, and controlled airspace can affect the appointment and media mix.",
+    ],
+    localPoints: [
+      "Phoebus and Fort Monroe properties benefit from architecture, neighborhood context, and accurate vertical-flow coverage.",
+      "Buckroe and Fox Hill listings should scope water access, views, wind, and authorized aerial coverage before launch.",
+      "Floor plans and Matterport can help relocation buyers evaluate the home before arriving in Hampton Roads.",
+    ],
+    proofCue: "Historic neighborhoods, waterfront settings, and relocation buyers call for address-specific media decisions.",
+    proofServices: ["Photography", "Floor Plans", "Aerial", "Matterport"],
+    recommendedPackage: "Quick & Easy",
+    packageReason:
+      "A practical baseline for complete photography and floor-plan context, with video, aerial, twilight, or Matterport added when the property calls for them.",
+    nearby: ["Newport News", "Poquoson", "Williamsburg", "Norfolk"],
+  },
+  {
+    slug: "newport-news",
+    name: "Newport News",
+    region: "Hampton Roads, VA",
+    headline: "Newport News real estate photography across the Peninsula.",
+    intro:
+      "AREM photographs listings from Hilton Village and Riverside to City Center, Denbigh, and the northern Peninsula, with media packages built around each property's layout and setting.",
+    listingContext: [
+      "Newport News stretches along the James River with historic neighborhoods, established subdivisions, urban condos, new construction, and relocation-driven listings.",
+      "Waterfront context, occupied-home access, community amenities, and nearby aviation facilities should be reviewed before the shoot.",
+    ],
+    localPoints: [
+      "Hilton Village and Riverside homes often benefit from detail photography, floor plans, and an exterior sequence that explains their setting.",
+      "City Center condos require confirmed parking, access, elevator, and amenity permissions.",
+      "Denbigh and northern Peninsula listings range from standard resales to larger lots where aerial or video may add useful context.",
+    ],
+    proofCue: "Historic homes, riverfront neighborhoods, condos, and relocation inventory need different launch plans.",
+    proofServices: ["Photography", "Floor Plans", "Video", "Aerial"],
+    recommendedPackage: "Quick & Easy",
+    packageReason:
+      "Covers complete photography, a floor plan, and a property website for standard Peninsula listings, with feature-led upgrades available.",
+    nearby: ["Hampton", "Poquoson", "Williamsburg", "Suffolk"],
+  },
+  {
+    slug: "williamsburg",
+    name: "Williamsburg",
+    region: "Historic Triangle, VA",
+    headline: "Williamsburg real estate photography for distinctive homes and communities.",
+    intro:
+      "AREM serves Williamsburg, James City County, York County, and surrounding Historic Triangle communities with photography, floor plans, video, drone, Matterport, and twilight media.",
+    listingContext: [
+      "The Williamsburg market includes historic-area homes, planned and gated communities, golf and waterfront properties, retirement-oriented housing, and new construction.",
+      "Community access, amenities, architectural details, and remote-buyer needs should shape the media plan before the appointment.",
+    ],
+    localPoints: [
+      "City and College-area listings benefit from accurate architecture and walkable-context coverage.",
+      "Kingsmill, Ford's Colony, and other amenity-rich communities may warrant video, Matterport, and approved amenity photography.",
+      "James City and York County properties should identify gates, acreage, water, outbuildings, and aerial priorities before booking.",
+    ],
+    proofCue: "Historic character, community amenities, and remote buyers raise the value of complete visual context.",
+    proofServices: ["Photography", "Matterport", "Video", "Floor Plans"],
+    recommendedPackage: "Property Spotlight",
+    packageReason:
+      "Adds video, aerial, twilight, floor-plan, and property-site support for listings where architecture, setting, or seller presentation matters.",
+    nearby: ["Newport News", "Hampton", "Yorktown", "Richmond"],
+  },
+  {
     slug: "hampton-roads",
     name: "Hampton Roads",
     region: "Southeastern Virginia",

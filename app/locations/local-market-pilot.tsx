@@ -6,24 +6,68 @@ import {
   Landmark,
   MapPinned,
 } from "lucide-react";
-import { company } from "../site-data";
+import { company, type MarketPage } from "../site-data";
 import { hasDb } from "../../lib/db";
 import { getCityCoverageSummary, type CityCoverageSummary } from "../../lib/coverage";
-import { getPublicListings } from "../../lib/public-listings";
-import {
-  chesapeakeBusinesses,
-  chesapeakeNeighborhoods,
-  representativeChesapeakeListings,
-} from "./chesapeake-data";
-import { ChesapeakeListingDirectory } from "./chesapeake-listing-directory";
+import { getPublicListings, type PublicListingFeed } from "../../lib/public-listings";
+import type { LocalMarketContent } from "./local-market-data";
+import { LocalListingDirectory } from "./local-listing-directory";
 
-async function loadCoverageSummary(): Promise<CityCoverageSummary | null> {
+type Props = {
+  market: MarketPage;
+  content: LocalMarketContent;
+};
+
+async function loadCoverageSummary(
+  content: LocalMarketContent,
+): Promise<CityCoverageSummary | null> {
   if (!hasDb) return null;
+
   try {
-    return await getCityCoverageSummary("Chesapeake", "VA");
+    const results = await Promise.all(
+      content.coverageAreas.map((area) => getCityCoverageSummary(area.city, area.state)),
+    );
+    const summaries = results.filter((value): value is CityCoverageSummary => value !== null);
+    if (summaries.length === 0) return null;
+
+    return {
+      totalShoots: summaries.reduce((total, summary) => total + summary.totalShoots, 0),
+      firstShootDate:
+        summaries
+          .map((summary) => summary.firstShootDate)
+          .filter((value): value is string => Boolean(value))
+          .sort()[0] ?? null,
+      latestShootDate:
+        summaries
+          .map((summary) => summary.latestShootDate)
+          .filter((value): value is string => Boolean(value))
+          .sort()
+          .at(-1) ?? null,
+      activeYears: Math.max(...summaries.map((summary) => summary.activeYears)),
+    };
   } catch {
     return null;
   }
+}
+
+async function loadListingFeed(content: LocalMarketContent): Promise<PublicListingFeed> {
+  const feeds = await Promise.all(
+    content.coverageAreas.map((area) => getPublicListings(area.city, area.state)),
+  );
+  const listings = [...new Map(feeds.flatMap((feed) => feed.listings).map((item) => [item.id, item])).values()]
+    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    .slice(0, 12);
+  const updatedAt = feeds
+    .map((feed) => feed.updatedAt)
+    .filter((value): value is string => Boolean(value))
+    .sort()
+    .at(-1) ?? null;
+
+  return {
+    connected: feeds.some((feed) => feed.connected),
+    updatedAt,
+    listings,
+  };
 }
 
 function formatMonthYear(value: string | null) {
@@ -37,19 +81,19 @@ function formatMonthYear(value: string | null) {
   }).format(date);
 }
 
-export async function ChesapeakePilot() {
+export async function LocalMarketPilot({ market, content }: Props) {
   const [coverage, feed] = await Promise.all([
-    loadCoverageSummary(),
-    getPublicListings("Chesapeake"),
+    loadCoverageSummary(content),
+    loadListingFeed(content),
   ]);
   const live = feed.connected && feed.listings.length > 0;
-  const listings = live ? feed.listings : [...representativeChesapeakeListings];
+  const listings = live ? feed.listings : [...content.representativeListings];
   const latestCoverage = formatMonthYear(coverage?.latestShootDate ?? null);
   const listingJsonLd = live
     ? {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        name: "Active Chesapeake listings photographed by AREM",
+        name: `Active ${market.name} listings photographed by AREM`,
         itemListElement: listings.map((listing, index) => ({
           "@type": "ListItem",
           position: index + 1,
@@ -61,7 +105,7 @@ export async function ChesapeakePilot() {
             dateModified: listing.updatedAt,
             about: {
               "@type": "Residence",
-              name: `${listing.propertyType} in ${listing.neighborhood}, Chesapeake`,
+              name: `${listing.propertyType} in ${listing.neighborhood}, ${listing.city}`,
               numberOfBedrooms: listing.bedrooms ?? undefined,
               floorSize: listing.livingAreaSqft
                 ? {
@@ -87,14 +131,16 @@ export async function ChesapeakePilot() {
   const proofPoints = [
     {
       value: coverage ? coverage.totalShoots.toLocaleString() : company.stats.shoots,
-      label: coverage ? "Chesapeake shoots in the archive" : "AREM shoots since 2016",
+      label: coverage
+        ? `${market.name}${content.areaType === "AdministrativeArea" ? "-area" : ""} shoots in the archive`
+        : "AREM shoots since 2016",
     },
     {
       value: coverage ? `${coverage.activeYears} years` : "Since 2016",
-      label: latestCoverage ? `Coverage through ${latestCoverage}` : "Established Hampton Roads coverage",
+      label: latestCoverage ? `Coverage through ${latestCoverage}` : `Established ${market.region} coverage`,
     },
     {
-      value: "5 local areas",
+      value: `${content.neighborhoods.length} local areas`,
       label: "Detailed below with property-specific media guidance",
     },
     {
@@ -108,22 +154,22 @@ export async function ChesapeakePilot() {
       {listingJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(listingJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(listingJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       )}
       <section className="border-b border-line bg-night text-paper">
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
           <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
             <div>
-              <p className="eyebrow text-twilight">Chesapeake market proof</p>
+              <p className="eyebrow text-twilight">{market.name} market proof</p>
               <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
-                Chesapeake is not one kind of listing market.
+                {market.name} is not one kind of listing market.
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-paper/70">
-                Greenbrier condos, Great Bridge waterfront homes, Western Branch
-                resales, and southern Chesapeake acreage need different media
-                decisions. The page below connects local context to the way each
-                property should be photographed and launched.
+                {market.listingContext.join(" ")} The local guide below connects that
+                context to practical media decisions for the property.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] bg-paper/15 lg:grid-cols-4">
@@ -138,24 +184,30 @@ export async function ChesapeakePilot() {
         </div>
       </section>
 
-      <section id="chesapeake-neighborhoods" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+      <section
+        id={`${market.slug}-neighborhoods`}
+        className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20"
+      >
         <div className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
           <div>
-            <p className="eyebrow text-brand">Neighborhood field guide</p>
+            <p className="eyebrow text-brand">Local field guide</p>
             <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               Local context that changes the media plan.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-2">
-              Chesapeake spans dense commercial corridors, mature subdivisions,
-              canals, planned communities, and rural acreage. These are practical
-              listing notes, not generic neighborhood descriptions.
+              These area notes connect recognizable places, common property types,
+              and practical listing-media decisions. They are written for this
+              market rather than repeated from a generic city template.
             </p>
-            <nav aria-label="Chesapeake neighborhood sections" className="mt-6 border-y border-line py-4">
+            <nav
+              aria-label={`${market.name} local area sections`}
+              className="mt-6 border-y border-line py-4"
+            >
               <ul className="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-1">
-                {chesapeakeNeighborhoods.map((neighborhood) => (
+                {content.neighborhoods.map((neighborhood) => (
                   <li key={neighborhood.slug}>
                     <a
-                      href={`#${neighborhood.slug}`}
+                      href={`#${market.slug}-${neighborhood.slug}`}
                       className="inline-flex items-center gap-2 font-semibold text-brand hover:text-brand-ink"
                     >
                       <MapPinned className="h-4 w-4" /> {neighborhood.name}
@@ -167,9 +219,9 @@ export async function ChesapeakePilot() {
           </div>
 
           <div className="divide-y divide-line border-y border-line">
-            {chesapeakeNeighborhoods.map((neighborhood) => (
+            {content.neighborhoods.map((neighborhood) => (
               <article
-                id={neighborhood.slug}
+                id={`${market.slug}-${neighborhood.slug}`}
                 key={neighborhood.slug}
                 className="scroll-mt-24 py-7 first:pt-0 last:pb-0"
               >
@@ -213,24 +265,32 @@ export async function ChesapeakePilot() {
         </div>
       </section>
 
-      <ChesapeakeListingDirectory listings={listings} live={live} updatedAt={feed.updatedAt} />
+      <LocalListingDirectory
+        marketName={market.name}
+        marketSlug={market.slug}
+        listings={listings}
+        live={live}
+        updatedAt={feed.updatedAt}
+      />
 
-      <section id="chesapeake-businesses" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+      <section
+        id={`${market.slug}-businesses`}
+        className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20"
+      >
         <div className="grid gap-8 lg:grid-cols-[0.68fr_1.32fr]">
           <div>
             <p className="eyebrow text-brand">Local places to know</p>
             <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Independent businesses help explain the city around the listing.
+              Independent businesses help explain the community around the listing.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-2">
-              These are editorial community references, selected because they
-              add useful context to the Chesapeake areas described above. They
-              are not paid placements or service endorsements.
+              These are editorial community references selected for useful local
+              context. They are not paid placements or service endorsements.
             </p>
           </div>
 
           <div className="divide-y divide-line border-y border-line">
-            {chesapeakeBusinesses.map((business) => (
+            {content.businesses.map((business) => (
               <article key={business.name} className="grid gap-4 py-6 sm:grid-cols-[0.72fr_1.28fr]">
                 <div>
                   <p className="flex items-center gap-2 font-mono text-[0.68rem] font-semibold uppercase text-brand">
@@ -264,7 +324,7 @@ export async function ChesapeakePilot() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center">
           <div>
             <p className="flex items-center gap-2 font-mono text-xs font-semibold uppercase text-brand">
-              <CalendarDays className="h-4 w-4" /> Chesapeake appointment planning
+              <CalendarDays className="h-4 w-4" /> {market.name} appointment planning
             </p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
               Match the media plan to the address before launch day.
@@ -274,7 +334,7 @@ export async function ChesapeakePilot() {
             href={company.bookingUrl}
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-ink"
           >
-            Book in Chesapeake <ArrowRight className="h-4 w-4" />
+            Book in {market.name} <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

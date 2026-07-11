@@ -11,7 +11,8 @@
     "test:recommend": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test app/packages/recommend.test.mts",
     "test:leads": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test app/api/leads/validation.test.mts app/api/leads/retry-policy.test.mts",
     "test:coverage": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test lib/coverage-public.test.mts",
-    "test:listings": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test lib/public-listings.test.mts"
+    "test:listings": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test lib/public-listings.test.mts",
+    "test:locations": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test app/locations/local-market-data.test.mts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

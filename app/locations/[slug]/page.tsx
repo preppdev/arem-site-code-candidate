@@ -10,12 +10,8 @@ import {
 } from "../../site-data";
 import { AgentFastPath } from "../../_components/agent-fast-path";
 import { LaunchProofStrip } from "../../_components/launch-proof-strip";
-import { ChesapeakePilot } from "../chesapeake-pilot";
-import {
-  chesapeakeBusinesses,
-  chesapeakeFaqs,
-  chesapeakeNeighborhoods,
-} from "../chesapeake-data";
+import { LocalMarketPilot } from "../local-market-pilot";
+import { localMarketData } from "../local-market-data";
 
 export const revalidate = 900;
 
@@ -34,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!market) return {};
 
   return {
-    title: `Real Estate Photography in ${market.name}`,
+    title: `${market.name} Real Estate Photographer`,
     description: `${market.intro} Published AREM package anchors start at $100, with photography, floor plans, video, drone, Matterport, twilight, and listing media support.`,
     alternates: {
       canonical: `/locations/${market.slug}`,
@@ -54,9 +50,13 @@ export default async function MarketPage({ params }: Props) {
 
   if (!market) notFound();
 
-  const isChesapeake = market.slug === "chesapeake";
+  const localData = localMarketData[market.slug];
+  const nearbyMarkets = market.nearby.flatMap((name) => {
+    const nearby = marketPages.find((item) => item.name === name);
+    return nearby ? [nearby] : [];
+  });
 
-  const faqItems = isChesapeake ? [...chesapeakeFaqs] : [
+  const faqItems = localData ? [...localData.faqs] : [
     {
       q: `Does AREM serve ${market.name}?`,
       a: `Yes. ${market.name} is part of AREM's ${market.region} service-area focus. Travel-sensitive timing, drone conditions, and special requests are confirmed before the appointment is locked.`,
@@ -81,8 +81,8 @@ export default async function MarketPage({ params }: Props) {
         "@id": "https://americanrealestatemedia.com/#localbusiness",
       },
       areaServed: {
-        "@type": "City",
-        name: market.name,
+        "@type": localData?.areaType ?? "City",
+        name: `${market.name}${localData ? `, ${localData.state}` : ""}`,
       },
       description: market.intro,
       offers: packages.map((pkg) => ({
@@ -128,13 +128,13 @@ export default async function MarketPage({ params }: Props) {
         },
       })),
     },
-    ...(isChesapeake
+    ...(localData
       ? [
           {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Chesapeake neighborhood guide",
-            itemListElement: chesapeakeNeighborhoods.map((neighborhood, index) => ({
+            name: `${market.name} local area guide`,
+            itemListElement: localData.neighborhoods.map((neighborhood, index) => ({
               "@type": "ListItem",
               position: index + 1,
               item: {
@@ -142,8 +142,8 @@ export default async function MarketPage({ params }: Props) {
                 name: neighborhood.name,
                 description: neighborhood.overview,
                 containedInPlace: {
-                  "@type": "City",
-                  name: "Chesapeake, VA",
+                  "@type": localData.areaType,
+                  name: `${market.name}, ${localData.state}`,
                 },
               },
             })),
@@ -151,8 +151,8 @@ export default async function MarketPage({ params }: Props) {
           {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Independent Chesapeake businesses",
-            itemListElement: chesapeakeBusinesses.map((business, index) => ({
+            name: `Independent businesses in the ${market.name} guide`,
+            itemListElement: localData.businesses.map((business, index) => ({
               "@type": "ListItem",
               position: index + 1,
               item: {
@@ -161,8 +161,8 @@ export default async function MarketPage({ params }: Props) {
                 url: business.href,
                 description: business.description,
                 areaServed: {
-                  "@type": "City",
-                  name: "Chesapeake, VA",
+                  "@type": localData.areaType,
+                  name: `${market.name}, ${localData.state}`,
                 },
               },
             })),
@@ -175,7 +175,9 @@ export default async function MarketPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <main className="flex-1">
         <section className="border-b border-line bg-paper-2">
@@ -231,7 +233,7 @@ export default async function MarketPage({ params }: Props) {
           serviceFocus={market.proofServices}
         />
 
-        {isChesapeake && <ChesapeakePilot />}
+        {localData && <LocalMarketPilot market={market} content={localData} />}
 
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
@@ -263,7 +265,7 @@ export default async function MarketPage({ params }: Props) {
           </div>
         </section>
 
-        {!isChesapeake && (
+        {!localData && (
           <section className="border-y border-line bg-paper-2">
             <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-20">
               <div className="lg:col-span-5">
@@ -347,6 +349,35 @@ export default async function MarketPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        {nearbyMarkets.length > 0 && (
+          <section className="border-y border-line bg-paper-2">
+            <div className="mx-auto grid max-w-7xl gap-6 px-5 py-10 sm:px-8 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">
+              <div>
+                <p className="eyebrow text-brand">Nearby markets</p>
+                <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink">
+                  Continue through the service corridor.
+                </h2>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {nearbyMarkets.map((nearby) => (
+                  <a
+                    key={nearby.slug}
+                    href={`/locations/${nearby.slug}`}
+                    className="group border-t border-line pt-3"
+                  >
+                    <span className="text-sm font-semibold text-ink group-hover:text-brand">
+                      {nearby.name}
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-muted">
+                      {nearby.region}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-12">

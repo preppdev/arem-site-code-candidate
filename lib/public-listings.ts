@@ -43,6 +43,7 @@ function isFresh(value: string | undefined, now: number) {
 function isPublicListing(
   value: PublicListingFeedRecord,
   city: string,
+  state: string,
   now: number,
 ): value is PublicListing {
   return Boolean(
@@ -58,7 +59,7 @@ function isPublicListing(
       value.listingStatus?.toLowerCase() === "for_sale" &&
       value.status === "for_sale" &&
       value.city?.toLowerCase() === city.toLowerCase() &&
-      value.state === "VA" &&
+      value.state?.toUpperCase() === state.toUpperCase() &&
       isFresh(value.lastCheckedAt, now),
   );
 }
@@ -66,18 +67,23 @@ function isPublicListing(
 export function filterPublicListings(
   listings: PublicListingFeedRecord[],
   city: string,
+  state = "VA",
   now = Date.now(),
 ) {
-  return listings.filter((listing) => isPublicListing(listing, city, now));
+  return listings.filter((listing) => isPublicListing(listing, city, state, now));
 }
 
-export async function getPublicListings(city: string): Promise<PublicListingFeed> {
+export async function getPublicListings(
+  city: string,
+  state = "VA",
+): Promise<PublicListingFeed> {
   const endpoint = process.env.AREM_PUBLIC_LISTINGS_FEED_URL;
   if (!endpoint) return { connected: false, updatedAt: null, listings: [] };
 
   try {
     const url = new URL(endpoint);
     url.searchParams.set("city", city);
+    url.searchParams.set("state", state);
     url.searchParams.set("status", "for_sale");
 
     const token = process.env.AREM_PUBLIC_LISTINGS_FEED_TOKEN;
@@ -91,7 +97,7 @@ export async function getPublicListings(city: string): Promise<PublicListingFeed
       updatedAt?: string;
       listings?: PublicListingFeedRecord[];
     };
-    const listings = filterPublicListings(payload.listings ?? [], city).slice(0, 12);
+    const listings = filterPublicListings(payload.listings ?? [], city, state).slice(0, 12);
 
     return {
       connected: true,

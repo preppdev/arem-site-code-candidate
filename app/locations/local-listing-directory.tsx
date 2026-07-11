@@ -6,6 +6,8 @@ import { ArrowUpRight, Camera, Home, MapPin, SlidersHorizontal } from "lucide-re
 import type { PublicListing } from "../../lib/public-listings";
 
 type Props = {
+  marketName: string;
+  marketSlug: string;
   listings: PublicListing[];
   live: boolean;
   updatedAt: string | null;
@@ -33,7 +35,13 @@ function formatUpdatedAt(value: string | null) {
   }).format(date);
 }
 
-export function ChesapeakeListingDirectory({ listings, live, updatedAt }: Props) {
+export function LocalListingDirectory({
+  marketName,
+  marketSlug,
+  listings,
+  live,
+  updatedAt,
+}: Props) {
   const [neighborhood, setNeighborhood] = useState(ALL);
   const [propertyType, setPropertyType] = useState(ALL);
   const neighborhoods = useMemo(
@@ -52,17 +60,17 @@ export function ChesapeakeListingDirectory({ listings, live, updatedAt }: Props)
   const updatedLabel = formatUpdatedAt(updatedAt);
 
   return (
-    <section id="chesapeake-properties" className="border-y border-line bg-paper-2">
+    <section id={`${marketSlug}-properties`} className="border-y border-line bg-paper-2">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
           <div>
             <p className="eyebrow text-brand">
-              {live ? "Active Chesapeake listings" : "Property discovery prototype"}
+              {live ? `Active ${marketName} listings` : "Property discovery prototype"}
             </p>
             <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               {live
                 ? "Explore homes photographed by AREM and currently on the market."
-                : "A local discovery layer built around the listings AREM photographs."}
+                : `A ${marketName} discovery layer built around the listings AREM photographs.`}
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-2">
               {live
@@ -112,7 +120,9 @@ export function ChesapeakeListingDirectory({ listings, live, updatedAt }: Props)
             {filtered.length} {filtered.length === 1 ? "property" : "properties"}
           </p>
           <p className="text-muted">
-            {live && updatedLabel ? `Status verified ${updatedLabel}` : "Representative AREM media profiles"}
+            {live && updatedLabel
+              ? `Status verified ${updatedLabel}`
+              : "Representative AREM media profiles"}
           </p>
         </div>
 
@@ -146,7 +156,7 @@ export function ChesapeakeListingDirectory({ listings, live, updatedAt }: Props)
                   <h3 className="mt-2 text-base font-semibold text-ink">{listing.title}</h3>
                   <p className="mt-1 text-sm text-muted">
                     {listing.propertyType}
-                    {price ? ` · ${price}` : ""}
+                    {price ? ` / ${price}` : ""}
                   </p>
                   {(listing.bedrooms || listing.bathrooms || listing.livingAreaSqft) && (
                     <p className="mt-3 flex items-center gap-2 text-xs text-ink-2">
@@ -159,7 +169,7 @@ export function ChesapeakeListingDirectory({ listings, live, updatedAt }: Props)
                           : null,
                       ]
                         .filter(Boolean)
-                        .join(" · ")}
+                        .join(" / ")}
                     </p>
                   )}
                   <div className="mt-4 flex flex-wrap gap-1.5">
