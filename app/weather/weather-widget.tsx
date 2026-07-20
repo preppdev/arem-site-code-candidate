@@ -27,6 +27,7 @@ type TidePayload = {
   miles: number;
   curve: Array<{ t: string; v: number }>;
   hilo: Array<{ t: string; v: number; kind: "H" | "L" }>;
+  curveSource: "predicted" | "interpolated";
 };
 type ForecastPayload = {
   geo: { lat: number; lon: number; label: string; place: string };
@@ -468,7 +469,11 @@ export function WeatherWidget() {
               <p className="mt-3 text-xs text-muted">
                 Predictions for {data.tide.station.name} (station {data.tide.station.id}),{" "}
                 {data.tide.miles.toFixed(1)} mi from this address. Heights above MLLW; times local to the
-                station. NOAA CO-OPS data.
+                station.
+                {data.tide.curveSource === "interpolated"
+                  ? " Curve interpolated between NOAA's predicted highs and lows."
+                  : ""}{" "}
+                NOAA CO-OPS data.
               </p>
             </section>
           ) : (

@@ -154,6 +154,7 @@ export async function GET(request: Request) {
     miles: number;
     curve: Array<{ t: string; v: number }>;
     hilo: Array<{ t: string; v: number; kind: "H" | "L" }>;
+    curveSource: "predicted" | "interpolated";
   } = null;
   if (stationsRes.status === "fulfilled") {
     let best: Station | null = null;
@@ -170,20 +171,64 @@ export async function GET(request: Request) {
         const start = new Date();
         start.setHours(0, 0, 0, 0);
         const end = new Date(start.getTime() + 3 * 864e5);
-        const base =
+        const mk = (b: Date, e: Date, interval: string) =>
           "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter" +
           "?product=predictions&application=arem-site&datum=MLLW&units=english&time_zone=lst_ldt&format=json" +
-          `&station=${best.id}&begin_date=${coopsDate(start)}&end_date=${coopsDate(end)}`;
-        const [curve, hilo] = await Promise.all([
-          getJson<{ predictions?: Array<{ t: string; v: string; type?: "H" | "L" }> }>(base + "&interval=h"),
-          getJson<{ predictions?: Array<{ t: string; v: string; type?: "H" | "L" }> }>(base + "&interval=hilo"),
+          `&station=${best.id}&begin_date=${coopsDate(b)}&end_date=${coopsDate(e)}&interval=${interval}`;
+        // hilo is fetched one day wide on each side: subordinate stations
+        // (type S) publish ONLY hilo — the hourly curve request errors for
+        // them — and the cosine interpolation below needs extremes beyond
+        // the chart edges to draw a complete curve.
+        const wideStart = new Date(start.getTime() - 864e5);
+        const wideEnd = new Date(end.getTime() + 864e5);
+        const [curveRes, hiloRes] = await Promise.allSettled([
+          getJson<{ predictions?: Array<{ t: string; v: string }> }>(mk(start, end, "h")),
+          getJson<{ predictions?: Array<{ t: string; v: string; type?: "H" | "L" }> }>(mk(wideStart, wideEnd, "hilo")),
         ]);
-        if (curve.predictions?.length) {
+        const hiloWide =
+          hiloRes.status === "fulfilled" && hiloRes.value.predictions
+            ? hiloRes.value.predictions.map((p) => ({ t: p.t, v: +p.v, kind: (p.type === "H" ? "H" : "L") as "H" | "L" }))
+            : [];
+        let curve: Array<{ t: string; v: number }> =
+          curveRes.status === "fulfilled" && curveRes.value.predictions?.length
+            ? curveRes.value.predictions.map((p) => ({ t: p.t, v: +p.v }))
+            : [];
+        let curveSource: "predicted" | "interpolated" = "predicted";
+        if (!curve.length && hiloWide.length >= 2) {
+          // Cosine interpolation between consecutive predicted extremes —
+          // the standard tide-curve approximation for subordinate stations.
+          curveSource = "interpolated";
+          const startMs = start.getTime();
+          const endMs = end.getTime();
+          const parse = (t: string) => new Date(t.replace(" ", "T")).getTime();
+          const fmt = (ms: number) => {
+            const d = new Date(ms);
+            const p2 = (n: number) => String(n).padStart(2, "0");
+            return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
+          };
+          for (let i = 0; i < hiloWide.length - 1; i++) {
+            const aMs = parse(hiloWide[i].t);
+            const bMs = parse(hiloWide[i + 1].t);
+            const av = hiloWide[i].v;
+            const bv = hiloWide[i + 1].v;
+            for (let t = Math.ceil(aMs / 18e5) * 18e5; t < bMs; t += 18e5) { // 30-min samples
+              if (t < startMs || t > endMs) continue;
+              const f = (t - aMs) / (bMs - aMs);
+              curve.push({ t: fmt(t), v: av + (bv - av) * (1 - Math.cos(Math.PI * f)) / 2 });
+            }
+          }
+        }
+        const hilo = hiloWide.filter((m) => {
+          const ms = new Date(m.t.replace(" ", "T")).getTime();
+          return ms >= start.getTime() && ms <= end.getTime();
+        });
+        if (curve.length && hilo.length) {
           tide = {
             station: { id: best.id, name: best.name, state: best.state },
             miles: Math.round(bestD * 10) / 10,
-            curve: curve.predictions.map((p) => ({ t: p.t, v: +p.v })),
-            hilo: (hilo.predictions ?? []).map((p) => ({ t: p.t, v: +p.v, kind: p.type === "H" ? "H" : "L" })),
+            curve,
+            hilo,
+            curveSource,
           };
         }
       } catch {
